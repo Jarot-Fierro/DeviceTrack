@@ -1,0 +1,22 @@
+/.idea/DeviceTrack.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/vcs.xml
+/.idea/workspace.xml
+
+# entornos virtuales
+.venv/
+venv/
+
+# configuración de PyCharm
+.idea/
+
+# archivos temporales
+__pycache__/
+*.pyc
+*.pyo
+*.log
+
+# configuraciones locales
+devicetrack/.env
