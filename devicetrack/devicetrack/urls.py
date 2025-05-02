@@ -20,5 +20,6 @@ from core import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.base, name='/'),
+    path('', views.index, name='index'),
+    path('marcas', include('brand.urls'))
 ]
