@@ -11,170 +11,27 @@
 
 <!--  FORM -->
     <div class="row">
-      {% include 'brand_form.html' %}
+      {% include 'components/brand_form.html' %}
     </div>
 <!-- END FORM  -->
 
 
 
-<!-- DATA TABLE -->
-  <div class="row">
-    <div class="col-md-12">
-       <div class="card">
-          <div class="card-header">
-            <h4 class="card-title">Lista de Marcas</h4>
-          </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table
-                id="multi-filter-select"
-                class="display table table-striped table-hover"
-              >
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>ID</th>
-                    <th>Marca</th>
-                    <th>F. Modificación</th>
-                    <th>F. Creación</th>
-                    <th>Estado</th>
-                    <th>Acción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {% for brand in object_list %}
-                  <tr>
-                      <td>{{ forloop.counter }}</td>
-                      <td>{{ brand.id_brand }}</td>
-                      <td>{{ brand.name }}</td>
-                      <td>{{ brand.updated_at }}</td>
-                      <td>{{ brand.created_at }}</td>
-                      <td>{{ brand.status }}</td>
-                      <td>
-                        <a href="{% url 'brand_update' brand.id_brand %}" class="btn btn-primary p-1">
-                          <img src="{% static 'assets/img/icons/update-icon.svg' %}" alt="" height="20px" width="20px">
-                        </a>
-                        {% if brand.status == 'ACTIVE' %}
-                            <a href="{% url 'brand_toggle_status' brand.id_brand %}" class="btn btn-danger p-1 toggle-status-btn">
-                                <img src="{% static 'assets/img/icons/trash-icon.svg' %}" alt="" height="20px" width="20px">
-                            </a>
-                        {% else %}
-                            <a href="{% url 'brand_toggle_status' brand.id_brand %}" class="btn btn-success p-1 toggle-status-btn">
-                                <img src="{% static 'assets/img/icons/trash-icon.svg' %}" alt="" height="20px" width="20px">
-                            </a>
-                        {% endif %}
-
-                      </td>
-                  </tr>
-                {% endfor %}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-  </div>
+<!-- DATA TABLE ACTIVE -->
+    {% include 'components/brand_datatable_active.html' %}
+<!-- END DATA TABLE ACTIVE-->
 
 
-<!-- END DATA TABLE -->
+<!-- DATA TABLE INACTIVE -->
+    {% include 'components/brand_datatable_inactive.html' %}
+<!-- END DATA TABLE INACTIVE-->
 {% endblock %}
 
 
 {% block section_scripts %}
   <!-- Datatables -->
   <script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
-  <script>
-    $(document).ready(function () {
-      $("#basic-datatables").DataTable({});
-
-      $("#multi-filter-select").DataTable({
-        pageLength: 5,
-        initComplete: function () {
-          this.api()
-            .columns()
-            .every(function () {
-              var column = this;
-              var select = $(
-                '<select class="form-select"><option value=""></option></select>'
-              )
-                .appendTo($(column.footer()).empty())
-                .on("change", function () {
-                  var val = $.fn.dataTable.util.escapeRegex($(this).val());
-
-                  column
-                    .search(val ? "^" + val + "$" : "", true, false)
-                    .draw();
-                });
-
-              column
-                .data()
-                .unique()
-                .sort()
-                .each(function (d, j) {
-                  select.append(
-                    '<option value="' + d + '">' + d + "</option>"
-                  );
-                });
-            });
-        },
-      });
-
-      // Add Row
-      $("#add-row").DataTable({
-        pageLength: 5,
-      });
-
-      var action =
-        '<td> <div class="form-button-action"> <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
-
-      $("#addRowButton").click(function () {
-        $("#add-row")
-          .dataTable()
-          .fnAddData([
-            $("#addName").val(),
-            $("#addPosition").val(),
-            $("#addOffice").val(),
-            action,
-          ]);
-        $("#addRowModal").modal("hide");
-      });
-    });
-  </script>
-
-  <script>
-    $(document).ready(function () {
-        $('.toggle-status-btn').on('click', function (e) {
-            e.preventDefault(); // Detenemos la navegación por ahora
-
-            const url = $(this).attr('href'); // Obtenemos la URL a donde queremos ir
-
-            swal({
-                title: "¿Estás seguro?",
-                text: "Se cambiará el estado de esta marca",
-                type: "warning",
-                buttons: {
-                    cancel: {
-                        visible: true,
-                        text: "No, cancelar",
-                        className: "btn btn-danger",
-                    },
-                    confirm: {
-                        text: "Sí, continuar",
-                        className: "btn btn-success",
-                    },
-                },
-            }).then((confirmed) => {
-                if (confirmed) {
-                    window.location.href = url; // Redirige si confirma
-                } else {
-                    swal("Acción cancelada", "No hubieron cambios", {
-                        icon: "info",
-                        buttons: { confirm: { className: "btn btn-primary" } }
-                    });
-                }
-            });
-        });
-    });
-  </script>
+  <script src="{% static 'assets/js/plugin/datatables/datatables_def.js' %}"></script>
+  <script src="{% static 'assets/js/plugin/sweetalert/sweetalert_popup.js' %}"></script>
 
 {% endblock %}

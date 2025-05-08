@@ -1,0 +1,59 @@
+{% load static %}
+<div class="row">
+    <div class="col-md-12">
+       <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Registros Habilitados</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table
+                id="multi-filter-select"
+                class="display table table-striped table-hover"
+              >
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>ID</th>
+                    <th>Marca</th>
+                    <th>F. Modificación</th>
+                    <th>F. Creación</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for brand in object_list %}
+                  <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ brand.id_brand }}</td>
+                      <td>{{ brand.name }}</td>
+                      <td>{{ brand.updated_at }}</td>
+                      <td>{{ brand.created_at }}</td>
+                      <td>{{ brand.status }}</td>
+                      <td>
+                        <a href="{% url 'brand_update' brand.id_brand %}" class="btn btn-primary p-1">
+                          <img src="{% static 'assets/img/icons/update-icon.svg' %}" alt="" height="20px" width="20px">
+                        </a>
+                        {% if brand.status == 'ACTIVE' %}
+                            <a href="{% url 'brand_toggle_status' brand.id_brand %}" class="btn btn-danger p-1 toggle-status-btn">
+                                <img src="{% static 'assets/img/icons/trash-icon.svg' %}" alt="" height="20px" width="20px">
+                            </a>
+                        {% else %}
+                            <a href="{% url 'brand_toggle_status' brand.id_brand %}" class="btn btn-success p-1 toggle-status-btn">
+                                <img src="{% static 'assets/img/icons/trash-icon.svg' %}" alt="" height="20px" width="20px">
+                            </a>
+                        {% endif %}
+
+                      </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+

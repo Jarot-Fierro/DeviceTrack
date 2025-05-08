@@ -21,7 +21,8 @@ class BaseBrandFormView(TemplateView, FormMixin):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['object_list'] = Brand.objects.all().order_by('-updated_at')
+        context['object_list'] = Brand.objects.all().filter(status='ACTIVE').order_by('-updated_at')
+        context['object_list_inactive'] = Brand.objects.all().filter(status='INACTIVE').order_by('-updated_at')
 
         return context
 
