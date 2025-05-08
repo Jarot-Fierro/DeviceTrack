@@ -1,0 +1,41 @@
+{% if messages %}
+  {% for message in messages %}
+    <script>
+      window.addEventListener("DOMContentLoaded", function () {
+        var tipo = "{{ message.tags }}";
+        var titulo = "";
+        var icono = "success";
+
+        switch (tipo) {
+          case "error":
+            titulo = "Error";
+            icono = "error";
+            break;
+          case "warning":
+            titulo = "Advertencia";
+            icono = "warning";
+            break;
+          case "info":
+            titulo = "Información";
+            icono = "info";
+            break;
+          default:
+            titulo = "Éxito";
+            icono = "success";
+        }
+
+        swal({
+          title: titulo,
+          text: "{{ message }}",
+          icon: icono,
+          buttons: {
+            confirm: {
+              className: 'btn btn-' + icono,
+              text: "Aceptar"
+            }
+          }
+        });
+      });
+    </script>
+  {% endfor %}
+{% endif %}

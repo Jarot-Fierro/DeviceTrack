@@ -1,6 +1,8 @@
 from django.urls import path
-from brand import views
+from brand.views import *
 
 urlpatterns = [
-    path('/', views.brand_list, name='brand_list'),
+    path('crear', BrandCreateView.as_view(), name='brand_list'),
+    path('actualizar/<uuid:pk>', BrandUpdateView.as_view(), name='brand_update'),
+    path('estado/<uuid:pk>', BrandToggleStatusView.as_view(), name='brand_toggle_status'),
 ]
