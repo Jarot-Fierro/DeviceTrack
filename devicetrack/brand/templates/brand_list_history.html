@@ -1,0 +1,25 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+
+{% block title %}Marcas{% endblock %}
+
+{% block historic %}
+  <a href="{% url 'brand_list' %}" class="btn btn-label-info btn-round me-2">Mantenedor</a>
+{% endblock %}
+
+{% block content %}
+
+<!-- DATA TABLE ACTIVE -->
+    {% include 'components/brand_datatable_history.html' %}
+<!-- END DATA TABLE ACTIVE-->
+
+
+{% endblock %}
+
+
+{% block section_scripts %}
+  <!-- Datatables -->
+  <script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugin/datatables/datatables_def.js' %}"></script>
+
+{% endblock %}

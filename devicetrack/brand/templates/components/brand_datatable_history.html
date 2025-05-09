@@ -1,0 +1,66 @@
+{% load static %}
+<div class="row">
+    <div class="col-md-12">
+       <div class="card">
+          <div class="card-header">
+              <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2">
+                  <h4 class="card-title">Histórico</h4>
+                  <div class="ms-md-auto py-2 py-md-0">
+                      <button type="submit" class="btn btn-success btn-round">Reporte</button>
+                  </div>
+              </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table
+                id="multi-filter-select"
+                class="display table table-striped table-hover"
+              >
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>ID</th>
+                    <th>PosModificación</th>
+                    <th>PreModificación</th>
+                    <th>F. Creación</th>
+                    <th>Usuario Responsable</th>
+                    <th>Operación</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for brand in object_list %}
+                  <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ brand.id_brand_history }}</td>
+                      <td>
+                          <ul>
+                              <li>ID: {{ brand.id_brand }}</li>
+                              <li>Nombre: {{ brand.new_data.name }}</li>
+                              <li>Estado: {{ brand.new_data.status }}</li>
+                          </ul>
+                      </td>
+                      <td>
+                          <ul>
+                              {% if old_data %}
+                                  <li>ID: {{ brand.id_brand }}</li>
+                                  <li>Nombre: {{ brand.old_data.name }}</li>
+                                  <li>Estado: {{ brand.old_data.status }}</li>
+                              {% else %}
+                                No hubo modificaciones
+                              {% endif %}
+                          </ul>
+                      </td>
+                      <td>{{ brand.timestamp }}</td>
+                      <td>{{ brand.user_login }}</td>
+                      <td>{{ brand.operation }}</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
