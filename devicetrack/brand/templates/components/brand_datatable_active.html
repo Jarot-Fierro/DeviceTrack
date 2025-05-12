@@ -35,15 +35,9 @@
                         <a href="{% url 'brand_update' brand.id_brand %}" class="btn btn-primary p-1">
                           <img src="{% static 'assets/img/icons/update-icon.svg' %}" alt="" height="20px" width="20px">
                         </a>
-                        {% if brand.status == 'ACTIVE' %}
-                            <a href="{% url 'brand_toggle_status' brand.id_brand %}" class="btn btn-danger p-1 toggle-status-btn">
-                                <img src="{% static 'assets/img/icons/trash-icon.svg' %}" alt="" height="20px" width="20px">
-                            </a>
-                        {% else %}
-                            <a href="{% url 'brand_toggle_status' brand.id_brand %}" class="btn btn-success p-1 toggle-status-btn">
-                                <img src="{% static 'assets/img/icons/trash-icon.svg' %}" alt="" height="20px" width="20px">
-                            </a>
-                        {% endif %}
+                        <a href="{% url 'brand_toggle_status' brand.id_brand %}" class="btn btn-danger p-1 toggle-status-btn">
+                            <img src="{% static 'assets/img/icons/trash-icon.svg' %}" alt="" height="20px" width="20px">
+                        </a>
 
                       </td>
                   </tr>
