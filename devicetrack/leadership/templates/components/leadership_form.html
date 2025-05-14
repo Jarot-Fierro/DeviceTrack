@@ -1,0 +1,82 @@
+<form method="post">
+    {% csrf_token %}
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2">
+            <div>
+              <div class="card-title">
+                Acción {% if id_leadership %}Actualizar{% else %}Crear{% endif %}
+
+              </div>
+            </div>
+            <div class="ms-md-auto py-2 py-md-0">
+              {% if id_leadership %}
+                <a href="{% url 'leadership_list' %}" class="btn btn-secondary btn-round">Ir a Crear</a>
+              {% endif %}
+              <button type="submit" class="btn btn-primary btn-round">Guardar</button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card-body">
+          <div class="row">
+            {% if id_leadership %}
+              <div class="col-md-4 col-lg-4">
+                <div class="form-group">
+                    <label for="disableinput">ID.</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="disableinput"
+                      placeholder=""
+                      value="{{ id_leadership }}"
+                      disabled
+                    />
+                </div>
+              </div>
+            {% endif %}
+            <div class="col-md-4 col-lg-4">
+              <div class="form-group">
+                <label>Nombre Completo</label>
+                {{ form.name }}
+                {% if form.name.errors %}
+                  <div class="text-danger">{{ form.name.errors }}</div>
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+              <div class="form-group">
+                <label>Rut. <strong class="text-primary" style="font-size: 12px">(Sin puntos, con guión)</strong></label>
+                {{ form.rut }}
+                {% if form.rut.errors %}
+                  <div class="text-danger">{{ form.rut.errors }}</div>
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+              <div class="form-group">
+                <label>Correo.</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                  <div class="text-danger">{{ form.email.errors }}</div>
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+              <div class="form-group">
+                <label>Cargo.</label>
+                {{ form.boss_position }}
+                {% if form.boss_position.errors %}
+                  <div class="text-danger">{{ form.boss_position.errors }}</div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+

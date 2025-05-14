@@ -23,5 +23,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('marcas/', include('brand.urls')),
     path('categorias/', include('category.urls')),
-    path('modelo/', include('model.urls'))
+    path('modelo/', include('model.urls')),
+    path('jefeTic/', include('leadership.urls'))
 ]
