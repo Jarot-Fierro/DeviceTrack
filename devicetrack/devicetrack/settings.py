@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'category',
     'model',
     'leadership',
+    'operative_system',
 ]
 
 MIDDLEWARE = [
