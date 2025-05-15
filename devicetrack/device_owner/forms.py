@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator
-from .models import OperativeSystem
+from .models import DeviceOwner
 
 
 STATUS = [
@@ -10,13 +10,13 @@ STATUS = [
     ]
 
 
-class FormOperativeSystem(forms.ModelForm):
+class FormDeviceOwner(forms.ModelForm):
     name = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                'id': 'name_brand',
+                'id': 'name_device_owner',
                 'class': 'form-control',
-                'placeholder': 'Nombre del Sistema Operativo',
+                'placeholder': 'Propietario',
                 'min-lenght': 1,
                 'max-lenght': 100
             }),
@@ -25,7 +25,7 @@ class FormOperativeSystem(forms.ModelForm):
     description = forms.CharField(
         widget=forms.Textarea(
             attrs={
-                'id': 'description_brand',
+                'id': 'description_device_owner',
                 'class': 'form-control',
                 'rows': 5,
                 'placeholder': 'Escribe más detalles aquí...'
@@ -38,7 +38,7 @@ class FormOperativeSystem(forms.ModelForm):
         name = self.cleaned_data['name'].strip()
         current_instance = self.instance if self.instance.pk else None
 
-        exists = OperativeSystem.objects.filter(name__iexact=name).exclude(
+        exists = DeviceOwner.objects.filter(name__iexact=name).exclude(
             pk=current_instance.pk if current_instance else None).exists()
 
         if exists:
@@ -47,5 +47,5 @@ class FormOperativeSystem(forms.ModelForm):
         return name
 
     class Meta:
-        model = OperativeSystem
+        model = DeviceOwner
         fields = ['name', 'description']

@@ -103,7 +103,7 @@ class OperativeSystemToggleStatusView(View):
 
         save_history(request, instance, old_instance, 'toggle')
 
-        messages.success(request, 'El estado de la sistema operativo fue actualizado correctamente')
+        messages.success(request, 'El estado del registro fue actualizado correctamente')
         return redirect('operative_system_list')
 
 

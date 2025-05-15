@@ -103,7 +103,7 @@ class BrandToggleStatusView(View):
 
         save_history(request, instance, old_instance, 'toggle')
 
-        messages.success(request, 'El estado de la marca fue actualizada correctamente')
+        messages.success(request, 'El estado del registro fue actualizado correctamente')
         return redirect('brand_list')
 
 
