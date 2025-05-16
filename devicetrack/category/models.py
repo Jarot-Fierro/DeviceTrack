@@ -6,7 +6,7 @@ import uuid
 
 class Category(StandardModel):
     STATUS = [
-        ('ACTIVE','ACTIVE'),
+        ('ACTIVE', 'ACTIVE'),
         ('INACTIVE', 'INACTIVE')
     ]
 

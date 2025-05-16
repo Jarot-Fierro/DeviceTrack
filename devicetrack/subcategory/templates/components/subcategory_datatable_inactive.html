@@ -1,0 +1,53 @@
+{% load static %}
+<div class="row">
+    <div class="col-md-12">
+       <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Registros Deshabilitados</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table
+                id="multi-filter-select-2"
+                class="display table table-striped table-hover"
+              >
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>ID</th>
+                    <th>Subcategoría</th>
+                    <th>Categoría</th>
+                    <th>F. Modificación</th>
+                    <th>F. Creación</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for subcategory in object_list_inactive %}
+                  <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ subcategory.id_subcategory }}</td>
+                      <td>{{ subcategory.name }}</td>
+                      <td>{{ subcategory.category.name }}</td>
+                      <td>{{ subcategory.updated_at }}</td>
+                      <td>{{ subcategory.created_at }}</td>
+                      <td><span class="badge badge-danger">{{ subcategory.status }}</span></td>
+                      <td>
+                        <a href="{% url 'subcategory_update' subcategory.id_subcategory %}" class="btn btn-primary p-1">
+                          <img src="{% static 'assets/img/icons/update-icon.svg' %}" alt="" height="20px" width="20px">
+                        </a>
+                        <a href="{% url 'subcategory_toggle_status' subcategory.id_subcategory %}" class="btn btn-success p-1 toggle-status-btn">
+                            <img src="{% static 'assets/img/icons/trash-can-icon.svg' %}" alt="" height="20px" width="20px">
+                        </a>
+                      </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+

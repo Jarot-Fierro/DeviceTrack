@@ -1,0 +1,73 @@
+{% load static %}
+<div class="row">
+    <div class="col-md-12">
+       <div class="card">
+          <div class="card-header">
+              <h4 class="card-title">Histórico</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table
+                id="multi-filter-select"
+                class="display table table-striped table-hover"
+              >
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>ID</th>
+                    <th>PosModificación</th>
+                    <th>PreModificación</th>
+                    <th>F. Creación</th>
+                    <th>Usuario Responsable</th>
+                    <th>Operación</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for subcategory in object_list %}
+                  <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ subcategory.id_subcategory_history }}</td>
+                      <td>
+                          <ul>
+                              <li>ID: {{ subcategory.id_subcategory }}</li>
+                              <li>Nombre: {{ subcategory.new_data.name }}</li>
+                              <li>Categoría: {{ subcategory.new_data.category.name }}</li>
+                              <li>Estado:
+                                    <strong class="{% if subcategory.new_data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
+                                        {% if subcategory.new_data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
+                                    </strong>
+                              </li>
+                          </ul>
+                      </td>
+                      <td>
+                          <ul>
+                              {% if not subcategory.operation == 'create' %}
+                                <li>ID: {{ subcategory.id_subcategory }}</li>
+                                <li>Nombre: {{ subcategory.old_data.name }}</li>
+                                <li>Categoría: {{ subcategory.old_data.category.name }}</li>
+                                <li>Estado:
+                                    <strong class="{% if subcategory.old_data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
+                                        {% if subcategory.old_data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
+                                    </strong>
+                                </li>
+                              {% else %}
+                                <li>No hay registros anteriores</li>
+                              {% endif %}
+                          </ul>
+                      </td>
+                      <td>{{ subcategory.timestamp }}</td>
+                      <td>{{ subcategory.user_login }}</td>
+                      <td class="{% if subcategory.operation == 'create' %}text-success{% elif subcategory.operation == 'update' %}text-primary{% else %}text-danger{% endif %}">
+                          {% if subcategory.operation == 'create' %}Creación{% elif subcategory.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                      </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+

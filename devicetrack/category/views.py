@@ -70,11 +70,12 @@ class CategoryUpdateView(BaseCategoryFormView, ProcessFormView):
 
     def post(self, request, *args, **kwargs):
         form = self.get_form()
+        old_instance = model_to_dict(form.instance)
 
         if form.is_valid():
             if form.has_changed():
                 messages.success(request, 'El registro fue actualizado correctamente')
-                save_history(request, form.instance, None, 'update')
+                save_history(request, form.instance, old_instance, 'update')
 
                 return self.form_valid(form)
 

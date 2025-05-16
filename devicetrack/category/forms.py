@@ -12,7 +12,8 @@ class FormCategory(forms.ModelForm):
                 'min-lenght': 1,
                 'max-lenght': 100
             }
-        ),required=True
+        ),
+        required=True
     )
 
     class Meta:
