@@ -26,6 +26,7 @@ urlpatterns = [
     path('subcategorias/', include('subcategory.urls')),
     path('modelo/', include('model.urls')),
     path('jefeTic/', include('leadership.urls')),
-    path('SistemasOperativos/', include('operative_system.urls')),
-    path('PropietarioEquipo/', include('device_owner.urls')),
+    path('sistemasOperativos/', include('operative_system.urls')),
+    path('propietarioEquipo/', include('device_owner.urls')),
+    path('compañia/', include('company.urls'))
 ]

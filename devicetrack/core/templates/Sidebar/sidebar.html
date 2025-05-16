@@ -63,19 +63,19 @@
             <span class="sidebar-mini-icon">
               <i class="fa fa-ellipsis-h"></i>
             </span>
-            <h4 class="text-section">Components</h4>
+            <h4 class="text-section">Dispositivos</h4>
           </li>
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#base">
-              <i class="fas fa-layer-group"></i>
-              <p>Base</p>
+              <img class="me-2" src="{% static 'assets/img/icons/mobile-icon.svg' %}" alt="Icono de Carpeta" width="20px" height="20px">
+              <p>Teléfonos Celulares</p>
               <span class="caret"></span>
             </a>
             <div class="collapse" id="base">
               <ul class="nav nav-collapse">
                 <li>
-                  <a href="#">
-                    <span class="sub-item">Avatars</span>
+                  <a href="{% url 'company_list' %}">
+                    <span class="sub-item">Compañías</span>
                   </a>
                 </li>
                 <li>
