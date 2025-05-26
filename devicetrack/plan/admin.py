@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import Plan, TypePlan, PlanHistory
 
-# Register your models here.
+admin.site.register(Plan)
+admin.site.register(TypePlan)
+admin.site.register(PlanHistory)
+

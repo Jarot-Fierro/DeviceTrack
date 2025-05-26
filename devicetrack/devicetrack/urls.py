@@ -29,5 +29,6 @@ urlpatterns = [
     path('sistemasOperativos/', include('operative_system.urls')),
     path('propietarioEquipo/', include('device_owner.urls')),
     path('compañia/', include('company.urls')),
-    path('tipoPlan/', include('typeplan.urls'))
+    path('tipoPlan/', include('typeplan.urls')),
+    path('Plan/', include('plan.urls')),
 ]

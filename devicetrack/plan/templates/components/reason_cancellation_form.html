@@ -1,0 +1,65 @@
+<form method="post">
+    {% csrf_token %}
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2">
+            <div>
+              <div class="card-title">
+                Acción {% if id_plan %}Cancelación del Plan{% else %}Crear{% endif %}
+
+              </div>
+            </div>
+            <div class="ms-md-auto py-2 py-md-0">
+              {% if id_plan %}
+                <a href="{% url 'plan_list' %}" class="btn btn-label-secondary btn-round">Ir a Crear</a>
+                <a href="{% url 'plan_list' %}" class="btn btn-label-primary btn-round me-2">Vista Principal</a>
+              {% endif %}
+              <button type="submit" class="btn btn-primary btn-round">Guardar</button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                {% if id_plan %}
+                  <div class="col-md-4 col-lg-4">
+                    <div class="form-group">
+                        <label for="disableinput">ID.</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="disableinput"
+                          placeholder=""
+                          value="{{ id_plan }}"
+                          disabled
+                        />
+                    </div>
+                  </div>
+                {% endif %}
+                <div class="col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label>Motivo de la Cancelación.</label><br>
+                    {{ form.reason_cancellation }}
+                    {% if form.reason_cancellation.errors %}
+                      <div class="text-danger">{{ form.reason_cancellation.errors }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label>Fecha de Cancelación del Contrato.</label><br>
+                    {{ form.date_cancellation }}
+                    {% if form.date_cancellation.errors %}
+                      <div class="text-danger">{{ form.date_cancellation.errors }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</form>
+
+
