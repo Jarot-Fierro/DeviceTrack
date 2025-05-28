@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Chip, ChipHistory
 
-# Register your models here.
+admin.site.register(Chip)
+admin.site.register(ChipHistory)

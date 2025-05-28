@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     'device_owner',
     'company',
     'typeplan',
-    'plan'
+    'plan',
+    'chip',
 ]
 
 MIDDLEWARE = [
