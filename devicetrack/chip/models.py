@@ -35,5 +35,4 @@ class ChipHistory(StandardModel):
     user_login = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return self.id_chip_history
-
+        return f"{self.id_chip_history}"

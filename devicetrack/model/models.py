@@ -22,8 +22,7 @@ class ModelHistory(StandardModel):
     id_model_history = models.AutoField(primary_key=True, unique=True, editable=False)
     id_model = models.CharField(max_length=200)
     operation = models.CharField(max_length=100)
-    new_data = models.JSONField()
-    old_data = models.JSONField(null=True, blank=True)
+    data = models.JSONField()
     timestamp = models.DateTimeField(auto_now_add=True)
     user_login_history = models.CharField(max_length=100)
 

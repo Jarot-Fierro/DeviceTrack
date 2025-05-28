@@ -1,26 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, TemplateView, View
 from django.views.generic.edit import FormMixin, ProcessFormView
-from django.forms.models import model_to_dict
+from devicetrack.utils import save_history_standard
 from django.contrib import messages
 
 from .forms import FormCategory
 from .models import Category, CategoryHistory
-
-
-def save_history(request, instance, old_instance, action):
-    model_name = instance.__class__.__name__
-
-    data = {
-        'id_category': str(instance.id_category),
-        'operation': action,
-        'old_data': old_instance if old_instance else None,
-        'new_data': model_to_dict(instance),
-        'user_login_history': request.user.username if request.user.username else 'anonymous',
-        'user_login': request.user if request.user.is_authenticated else None
-    }
-    if model_name == 'Category':
-        CategoryHistory.objects.create(**data)
 
 
 class BaseCategoryFormView(TemplateView, FormMixin):
@@ -48,7 +33,7 @@ class CategoryCreateView(BaseCategoryFormView, ProcessFormView):
 
         if form.is_valid():
             messages.success(request, 'El registro a sido creado correctamente')
-            save_history(request, form.instance, None, 'create')
+            save_history_standard(request, form.instance, 'create')
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
@@ -70,12 +55,11 @@ class CategoryUpdateView(BaseCategoryFormView, ProcessFormView):
 
     def post(self, request, *args, **kwargs):
         form = self.get_form()
-        old_instance = model_to_dict(form.instance)
 
         if form.is_valid():
             if form.has_changed():
                 messages.success(request, 'El registro fue actualizado correctamente')
-                save_history(request, form.instance, old_instance, 'update')
+                save_history_standard(request, form.instance, 'update')
 
                 return self.form_valid(form)
 
@@ -99,11 +83,10 @@ class CategoryUpdateView(BaseCategoryFormView, ProcessFormView):
 class CategoryToggleStatusView(View):
     def get(self, request, pk):
         instance = get_object_or_404(Category, pk=pk)
-        old_instance = model_to_dict(instance)
         instance.status = 'INACTIVE' if instance.status == 'ACTIVE' else 'ACTIVE'
         instance.save(update_fields=['status', 'updated_at'])
 
-        save_history(request, instance, old_instance, 'toggle')
+        save_history_standard(request, instance, 'toggle')
 
         messages.success(request, 'El estado del registro fue actualizado correctamente')
 
