@@ -1,0 +1,77 @@
+<form method="post">
+    {% csrf_token %}
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2">
+            <div>
+              <div class="card-title">
+                Acción {% if id_chip %}Actualizar{% else %}Crear{% endif %}
+
+              </div>
+            </div>
+            <div class="ms-md-auto py-2 py-md-0">
+              {% if id_chip %}
+                <a href="{% url 'chip_list' %}" class="btn btn-secondary btn-round">Ir a Crear</a>
+              {% endif %}
+              <button type="submit" class="btn btn-primary btn-round">Guardar</button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card-body">
+          <div class="row">
+            {% if id_chip %}
+              <div class="col-md-4 col-lg-4">
+                <div class="form-group">
+                    <label for="disableinput">ID.</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="disableinput"
+                      placeholder=""
+                      value="{{ id_chip }}"
+                      disabled
+                    />
+                </div>
+              </div>
+            {% endif %}
+            <div class="col-md-4 col-lg-4">
+              <div class="form-group">
+                <label>Número de Teléfono.</label>
+                <div class="input-group">
+                  <span id="basic-addon1" class="input-group-text">+56 9</span>
+                  {{ form.number_phone }}
+                  {% if form.number_phone.errors %}
+                    <div class="text-danger">{{ form.number_phone.errors }}</div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+              <div class="form-group">
+                <label>Compañía de Teléfono.</label>
+                {{ form.company }}
+                {% if form.company.errors %}
+                  <div class="text-danger">{{ form.company.errors }}</div>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4">
+              <div class="form-group">
+                <label>Plan Telefónico.</label>
+                {{ form.plan }}
+                {% if form.plan.errors %}
+                  <div class="text-danger">{{ form.plan.errors }}</div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
