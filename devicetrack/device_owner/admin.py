@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import DeviceOwner, DeviceOwnerHistory
 
-# Register your models here.
+admin.site.register(DeviceOwner)
+admin.site.register(DeviceOwnerHistory)

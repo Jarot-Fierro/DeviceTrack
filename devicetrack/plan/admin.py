@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import Plan, TypePlan, PlanHistory
+from .models import Plan, PlanHistory
 
 admin.site.register(Plan)
-admin.site.register(TypePlan)
 admin.site.register(PlanHistory)
 
