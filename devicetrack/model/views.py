@@ -23,7 +23,6 @@ class BaseModelFormView(TemplateView, FormMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['object_list'] = Model.objects.all().filter(status='ACTIVE').order_by('-updated_at')
-        context['object_list_inactive'] = Model.objects.all().filter(status='INACTIVE').order_by('-updated_at')
 
         return context
 
@@ -87,7 +86,19 @@ class ModelToggleStatusView(View):
         save_history_standard(request, instance, 'toggle')
 
         messages.success(request, 'El estado del registro fue actualizado correctamente')
-        return redirect('model_list')
+
+        if instance.status == 'ACTIVE':
+            return redirect('model_deleted_records')
+        else:
+            return redirect('model_list')
+
+
+class ModelDeletedRecordsView(ListView):
+    model = Model
+    template_name = 'model_list_deleted_records.html'
+
+    def get_queryset(self):
+        return Model.objects.all().filter(status='INACTIVE').order_by('-updated_at')
 
 
 class ModelHistoryView(ListView):

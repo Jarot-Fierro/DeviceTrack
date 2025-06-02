@@ -23,14 +23,14 @@
                   </tr>
                 </thead>
                 <tbody>
-                {% for category in object_list_inactive %}
+                {% for category in object_list %}
                   <tr>
                       <td>{{ forloop.counter }}</td>
                       <td>{{ category.id_category }}</td>
                       <td>{{ category.name }}</td>
                       <td>{{ category.updated_at }}</td>
                       <td>{{ category.created_at }}</td>
-                      <td><span class="badge badge-danger">{{ category.status }}</span></td>
+                      <td><span class="badge badge-danger">INACTIVO</span></td>
                       <td>
                         <a href="{% url 'category_update' category.id_category %}" class="btn btn-primary p-1">
                           <img src="{% static 'assets/img/icons/update-icon.svg' %}" alt="" height="20px" width="20px">

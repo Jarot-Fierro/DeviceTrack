@@ -1,18 +1,17 @@
 {% extends 'Base/base.html' %}
 {% load static %}
 
-{% block title %}Sistemas Operativos{% endblock %}
+{% block title %}Compañías{% endblock %}
 
 {% block historic %}
   <a href="#" class="btn btn-label-success btn-round me-2">Reporte</a>
-  <a href="{% url 'operative_system_deleted_records' %}" class="btn btn-label-danger btn-round me-2">Registros Eliminados</a>
-  <a href="{% url 'operative_system_list' %}" class="btn btn-label-info btn-round me-2">Mantenedor</a>
+  <a href="{% url 'company_list' %}" class="btn btn-label-info btn-round me-2">Mantenedor</a>
 {% endblock %}
 
 {% block content %}
 
 <!-- DATA TABLE ACTIVE -->
-    {% include 'components/operative_system_datatable_history.html' %}
+    {% include 'components/company_datatable_inactive.html' %}
 <!-- END DATA TABLE ACTIVE-->
 
 

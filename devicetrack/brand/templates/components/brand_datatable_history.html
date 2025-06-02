@@ -15,8 +15,7 @@
                   <tr>
                     <th>#</th>
                     <th>ID</th>
-                    <th>PosModificación</th>
-                    <th>PreModificación</th>
+                    <th>Modificación</th>
                     <th>F. Creación</th>
                     <th>Usuario Responsable</th>
                     <th>Operación</th>
@@ -30,33 +29,20 @@
                       <td>
                           <ul>
                               <li>ID: {{ brand.id_brand }}</li>
-                              <li>Nombre: {{ brand.new_data.name }}</li>
+                              <li>Nombre: {{ brand.data.name }}</li>
                               <li>Estado:
-                                    <strong class="{% if brand.new_data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
-                                        {% if brand.new_data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
+                                    <strong class="{% if brand.data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
+                                        {% if brand.data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
                                     </strong>
                               </li>
                           </ul>
                       </td>
-                      <td>
-                          <ul>
-                              {% if not brand.operation == 'create' %}
-                                <li>ID: {{ brand.id_brand }}</li>
-                                <li>Nombre: {{ brand.old_data.name }}</li>
-                                <li>Estado:
-                                    <strong class="{% if brand.old_data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
-                                        {% if brand.old_data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
-                                    </strong>
-                                </li>
-                              {% else %}
-                                <li>No hay registros anteriores</li>
-                              {% endif %}
-                          </ul>
-                      </td>
                       <td>{{ brand.timestamp }}</td>
                       <td>{{ brand.user_login }}</td>
-                      <td class="{% if brand.operation == 'create' %}text-success{% elif brand.operation == 'update' %}text-primary{% else %}text-danger{% endif %}">
-                          {% if brand.operation == 'create' %}Creación{% elif brand.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                      <td>
+                          <span class="badge {% if brand.operation == 'create' %}badge-success{% elif brand.operation == 'update' %}badge-primary{% else %}badge-warning{% endif %}">
+                              {% if brand.operation == 'create' %}Creación{% elif brand.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                          </span>
                       </td>
                   </tr>
                 {% endfor %}

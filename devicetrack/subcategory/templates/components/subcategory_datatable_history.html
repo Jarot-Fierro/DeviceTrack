@@ -15,8 +15,7 @@
                   <tr>
                     <th>#</th>
                     <th>ID</th>
-                    <th>PosModificación</th>
-                    <th>PreModificación</th>
+                    <th>Modificación</th>
                     <th>F. Creación</th>
                     <th>Usuario Responsable</th>
                     <th>Operación</th>
@@ -30,35 +29,21 @@
                       <td>
                           <ul>
                               <li>ID: {{ subcategory.id_subcategory }}</li>
-                              <li>Nombre: {{ subcategory.new_data.name }}</li>
-                              <li>Categoría: {{ subcategory.new_data.category.name }}</li>
+                              <li>Nombre: {{ subcategory.data.name }}</li>
+                              <li>Categoría: {{ subcategory.data.category }}</li>
                               <li>Estado:
-                                    <strong class="{% if subcategory.new_data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
-                                        {% if subcategory.new_data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
+                                    <strong class="{% if subcategory.data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
+                                        {% if subcategory.data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
                                     </strong>
                               </li>
                           </ul>
                       </td>
-                      <td>
-                          <ul>
-                              {% if not subcategory.operation == 'create' %}
-                                <li>ID: {{ subcategory.id_subcategory }}</li>
-                                <li>Nombre: {{ subcategory.old_data.name }}</li>
-                                <li>Categoría: {{ subcategory.old_data.category.name }}</li>
-                                <li>Estado:
-                                    <strong class="{% if subcategory.old_data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
-                                        {% if subcategory.old_data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
-                                    </strong>
-                                </li>
-                              {% else %}
-                                <li>No hay registros anteriores</li>
-                              {% endif %}
-                          </ul>
-                      </td>
                       <td>{{ subcategory.timestamp }}</td>
                       <td>{{ subcategory.user_login }}</td>
-                      <td class="{% if subcategory.operation == 'create' %}text-success{% elif subcategory.operation == 'update' %}text-primary{% else %}text-danger{% endif %}">
-                          {% if subcategory.operation == 'create' %}Creación{% elif subcategory.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                      <td>
+                          <span class="badge {% if subcategory.operation == 'create' %}badge-success{% elif subcategory.operation == 'update' %}badge-primary{% else %}badge-warning{% endif %}">
+                              {% if subcategory.operation == 'create' %}Creación{% elif subcategory.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                          </span>
                       </td>
                   </tr>
                 {% endfor %}

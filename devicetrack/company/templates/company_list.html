@@ -4,8 +4,9 @@
 {% block title %}Compañías{% endblock %}
 
 {% block historic %}
-  <a href="#" class="btn btn-label-success btn-round me-2">Reporte</a>
-  <a href="{% url 'company_history' %}" class="btn btn-label-info btn-round me-2">Histórico</a>
+    <a href="#" class="btn btn-label-success btn-round me-2">Reporte</a>
+    <a href="{% url 'company_deleted_records' %}" class="btn btn-label-danger btn-round me-2">Registros Eliminados</a>
+    <a href="{% url 'company_history' %}" class="btn btn-label-info btn-round me-2">Histórico</a>
 {% endblock %}
 
 {% block content %}
@@ -17,15 +18,11 @@
 <!-- END FORM  -->
 
 
-
 <!-- DATA TABLE ACTIVE -->
     {% include 'components/company_datatable_active.html' %}
 <!-- END DATA TABLE ACTIVE-->
 
 
-<!-- DATA TABLE INACTIVE -->
-    {% include 'components/company_datatable_inactive.html' %}
-<!-- END DATA TABLE INACTIVE-->
 {% endblock %}
 
 

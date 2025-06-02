@@ -15,8 +15,7 @@
                   <tr>
                     <th>#</th>
                     <th>ID</th>
-                    <th>PosModificación</th>
-                    <th>PreModificación</th>
+                    <th>Modificación</th>
                     <th>F. Creación</th>
                     <th>Usuario Responsable</th>
                     <th>Operación</th>
@@ -30,35 +29,21 @@
                       <td>
                           <ul>
                               <li>ID: {{ type_plan.id_type_plan }}</li>
-                              <li>Nombre: {{ type_plan.new_data.name }}</li>
-                              <li>Descripción: {{ type_plan.new_data.description }}</li>
+                              <li>Nombre: {{ type_plan.data.name }}</li>
+                              <li>Descripción: {{ type_plan.data.description }}</li>
                               <li>Estado:
-                                    <strong class="{% if type_plan.new_data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
-                                        {% if type_plan.new_data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
+                                    <strong class="{% if type_plan.data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
+                                        {% if type_plan.data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
                                     </strong>
                               </li>
                           </ul>
                       </td>
-                      <td>
-                          <ul>
-                              {% if not type_plan.operation == 'create' %}
-                                <li>ID: {{ type_plan.id_type_plan }}</li>
-                                <li>Nombre: {{ type_plan.old_data.name }}</li>
-                                <li>Descripción: {{ type_plan.old_data.description }}</li>
-                                <li>Estado:
-                                    <strong class="{% if type_plan.old_data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
-                                        {% if type_plan.old_data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
-                                    </strong>
-                                </li>
-                              {% else %}
-                                <li>No hay registros anteriores</li>
-                              {% endif %}
-                          </ul>
-                      </td>
                       <td>{{ type_plan.timestamp }}</td>
                       <td>{{ type_plan.user_login }}</td>
-                      <td class="{% if type_plan.operation == 'create' %}text-success{% elif type_plan.operation == 'update' %}text-primary{% else %}text-danger{% endif %}">
-                          {% if type_plan.operation == 'create' %}Creación{% elif type_plan.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                      <td>
+                          <span class="badge {% if type_plan.operation == 'create' %}badge-success{% elif type_plan.operation == 'update' %}badge-primary{% else %}badge-warning{% endif %}">
+                              {% if type_plan.operation == 'create' %}Creación{% elif type_plan.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                          </span>
                       </td>
                   </tr>
                 {% endfor %}

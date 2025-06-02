@@ -15,8 +15,7 @@
                   <tr>
                     <th>#</th>
                     <th>ID</th>
-                    <th>PosModificación</th>
-                    <th>PreModificación</th>
+                    <th>Modificación</th>
                     <th>F. Creación</th>
                     <th>Usuario Responsable</th>
                     <th>Operación</th>
@@ -30,33 +29,20 @@
                       <td>
                           <ul>
                               <li>ID: {{ category.id_category }}</li>
-                              <li>Nombre: {{ category.new_data.name }}</li>
+                              <li>Nombre: {{ category.data.name }}</li>
                               <li>Estado:
-                                    <strong class="{% if category.new_data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
-                                        {% if category.new_data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
+                                    <strong class="{% if category.data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
+                                        {% if category.data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
                                     </strong>
                               </li>
                           </ul>
                       </td>
-                      <td>
-                          <ul>
-                              {% if not category.operation == 'create' %}
-                                <li>ID: {{ category.id_category }}</li>
-                                <li>Nombre: {{ category.old_data.name }}</li>
-                                <li>Estado:
-                                    <strong class="{% if category.old_data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
-                                        {% if category.old_data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
-                                    </strong>
-                                </li>
-                              {% else %}
-                                <li>No hay registros anteriores</li>
-                              {% endif %}
-                          </ul>
-                      </td>
                       <td>{{ category.timestamp }}</td>
                       <td>{{ category.user_login }}</td>
-                      <td class="{% if category.operation == 'create' %}text-success{% elif category.operation == 'update' %}text-primary{% else %}text-danger{% endif %}">
-                          {% if category.operation == 'create' %}Creación{% elif category.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                      <td>
+                          <span class="badge {% if category.operation == 'create' %}badge-success{% elif category.operation == 'update' %}badge-primary{% else %}badge-warning{% endif %}">
+                              {% if category.operation == 'create' %}Creación{% elif category.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                          </span>
                       </td>
                   </tr>
                 {% endfor %}

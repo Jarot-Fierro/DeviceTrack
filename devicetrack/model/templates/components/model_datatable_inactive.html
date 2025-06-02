@@ -23,14 +23,14 @@
                   </tr>
                 </thead>
                 <tbody>
-                {% for model in object_list_inactive %}
+                {% for model in object_list %}
                   <tr>
                       <td>{{ forloop.counter }}</td>
                       <td>{{ model.id_model }}</td>
                       <td>{{ model.name }}</td>
                       <td>{{ model.updated_at }}</td>
                       <td>{{ model.created_at }}</td>
-                      <td><span class="badge badge-danger">{{ model.status }}</span></td>
+                      <td><span class="badge badge-danger">INACTIVO</span></td>
                       <td>
                         <a href="{% url 'model_update' model.id_model %}" class="btn btn-primary p-1">
                           <img src="{% static 'assets/img/icons/update-icon.svg' %}" alt="" height="20px" width="20px">

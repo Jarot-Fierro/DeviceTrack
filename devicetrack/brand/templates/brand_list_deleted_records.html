@@ -1,28 +1,19 @@
 {% extends 'Base/base.html' %}
 {% load static %}
 
-{% block title %}Propietario Equipo{% endblock %}
+{% block title %}Marcas{% endblock %}
 
 {% block historic %}
     <a href="#" class="btn btn-label-success btn-round me-2">Reporte</a>
-    <a href="{% url 'device_owner_deleted_records' %}" class="btn btn-label-danger btn-round me-2">Registros Eliminados</a>
-    <a href="{% url 'device_owner_history' %}" class="btn btn-label-info btn-round me-2">Histórico</a>
+    <a href="{% url 'brand_list' %}" class="btn btn-label-info btn-round me-2">Mantenedor</a>
 {% endblock %}
 
 {% block content %}
 
-<!--  FORM -->
-    <div class="row">
-      {% include 'components/device_owner_form.html' %}
-    </div>
-<!-- END FORM  -->
 
-
-
-<!-- DATA TABLE ACTIVE -->
-    {% include 'components/device_owner_datatable_active.html' %}
-<!-- END DATA TABLE ACTIVE-->
-
+<!-- DATA TABLE INACTIVE -->
+    {% include 'components/brand_datatable_inactive.html' %}
+<!-- END DATA TABLE INACTIVE-->
 {% endblock %}
 
 

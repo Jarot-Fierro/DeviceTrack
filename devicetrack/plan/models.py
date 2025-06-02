@@ -63,7 +63,6 @@ class PlanHistory(StandardModel):
 
     # Foreignkey
     user_login = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    type_plan = models.ForeignKey(TypePlan, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.id_plan

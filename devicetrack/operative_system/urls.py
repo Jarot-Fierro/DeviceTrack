@@ -5,5 +5,6 @@ urlpatterns = [
     path('crear/', OperativeSystemCreateView.as_view(), name='operative_system_list'),
     path('actualizar/<uuid:pk>/', OperativeSystemUpdateView.as_view(), name='operative_system_update'),
     path('estado/<uuid:pk>/', OperativeSystemToggleStatusView.as_view(), name='operative_system_toggle_status'),
+    path('registros/eliminados/', OperativeSystemDeletedRecordsView.as_view(), name='operative_system_deleted_records'),
     path('historial/', OperativeSystemHistoryView.as_view(), name='operative_system_history'),
 ]

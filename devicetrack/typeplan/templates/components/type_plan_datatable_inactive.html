@@ -16,6 +16,7 @@
                     <th>#</th>
                     <th>ID</th>
                     <th>Plan</th>
+                    <th>Descripción</th>
                     <th>F. Modificación</th>
                     <th>F. Creación</th>
                     <th>Estado</th>
@@ -23,14 +24,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                {% for type_plan in object_list_inactive %}
+                {% for type_plan in object_list %}
                   <tr>
                       <td>{{ forloop.counter }}</td>
                       <td>{{ type_plan.id_type_plan }}</td>
                       <td>{{ type_plan.name }}</td>
+                      <td>{{ type_plan.description }}</td>
                       <td>{{ type_plan.updated_at }}</td>
                       <td>{{ type_plan.created_at }}</td>
-                      <td><span class="badge badge-danger">{{ type_plan.status }}</span></td>
+                      <td><span class="badge badge-danger">INACTIVO</span></td>
                       <td>
                         <a href="{% url 'type_plan_update' type_plan.id_type_plan %}" class="btn btn-primary p-1">
                           <img src="{% static 'assets/img/icons/update-icon.svg' %}" alt="" height="20px" width="20px">

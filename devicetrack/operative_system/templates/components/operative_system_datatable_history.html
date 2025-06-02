@@ -15,8 +15,7 @@
                   <tr>
                     <th>#</th>
                     <th>ID</th>
-                    <th>PosModificación</th>
-                    <th>PreModificación</th>
+                    <th>Modificación</th>
                     <th>F. Creación</th>
                     <th>Usuario Responsable</th>
                     <th>Operación</th>
@@ -30,35 +29,21 @@
                       <td>
                           <ul>
                               <li>ID: {{ operative_system.id_operative_system }}</li>
-                              <li>Nombre: {{ operative_system.new_data.name }}</li>
-                              <li>Descripción: {{ operative_system.new_data.description }}</li>
+                              <li>Nombre: {{ operative_system.data.name }}</li>
+                              <li>Descripción: {{ operative_system.data.description }}</li>
                               <li>Estado:
-                                    <strong class="{% if operative_system.new_data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
-                                        {% if operative_system.new_data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
+                                    <strong class="{% if operative_system.data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
+                                        {% if operative_system.data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
                                     </strong>
                               </li>
                           </ul>
                       </td>
-                      <td>
-                          <ul>
-                              {% if not operative_system.operation == 'create' %}
-                                <li>ID: {{ operative_system.id_operative_system }}</li>
-                                <li>Nombre: {{ operative_system.old_data.name }}</li>
-                                <li>Descripción: {{ operative_system.old_data.description }}</li>
-                                <li>Estado:
-                                    <strong class="{% if operative_system.old_data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
-                                        {% if operative_system.old_data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
-                                    </strong>
-                                </li>
-                              {% else %}
-                                <li>No hay registros anteriores</li>
-                              {% endif %}
-                          </ul>
-                      </td>
                       <td>{{ operative_system.timestamp }}</td>
                       <td>{{ operative_system.user_login }}</td>
-                      <td class="{% if operative_system.operation == 'create' %}text-success{% elif operative_system.operation == 'update' %}text-primary{% else %}text-danger{% endif %}">
-                          {% if operative_system.operation == 'create' %}Creación{% elif operative_system.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                      <td>
+                          <span class="badge {% if operative_system.operation == 'create' %}badge-success{% elif operative_system.operation == 'update' %}badge-primary{% else %}badge-warning{% endif %}">
+                              {% if operative_system.operation == 'create' %}Creación{% elif operative_system.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                          </span>
                       </td>
                   </tr>
                 {% endfor %}

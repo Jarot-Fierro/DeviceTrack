@@ -15,8 +15,7 @@
                   <tr>
                     <th>#</th>
                     <th>ID</th>
-                    <th>PosModificación</th>
-                    <th>PreModificación</th>
+                    <th>Modificación</th>
                     <th>F. Creación</th>
                     <th>Usuario Responsable</th>
                     <th>Operación</th>
@@ -30,33 +29,20 @@
                       <td>
                           <ul>
                               <li>ID: {{ model.id_model }}</li>
-                              <li>Nombre: {{ model.new_data.name }}</li>
+                              <li>Nombre: {{ model.data.name }}</li>
                               <li>Estado:
-                                    <strong class="{% if model.new_data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
-                                        {% if model.new_data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
+                                    <strong class="{% if model.data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
+                                        {% if model.data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
                                     </strong>
                               </li>
                           </ul>
                       </td>
-                      <td>
-                          <ul>
-                              {% if not model.operation == 'create' %}
-                                <li>ID: {{ model.id_model }}</li>
-                                <li>Nombre: {{ model.old_data.name }}</li>
-                                <li>Estado:
-                                    <strong class="{% if model.old_data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
-                                        {% if model.old_data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
-                                    </strong>
-                                </li>
-                              {% else %}
-                                <li>No hay registros anteriores</li>
-                              {% endif %}
-                          </ul>
-                      </td>
                       <td>{{ model.timestamp }}</td>
                       <td>{{ model.user_login }}</td>
-                      <td class="{% if model.operation == 'create' %}text-success{% elif model.operation == 'update' %}text-primary{% else %}text-danger{% endif %}">
-                          {% if model.operation == 'create' %}Creación{% elif model.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                      <td>
+                          <span class="badge {% if model.operation == 'create' %}badge-success{% elif model.operation == 'update' %}badge-primary{% else %}badge-warning{% endif %}">
+                              {% if model.operation == 'create' %}Creación{% elif model.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                          </span>
                       </td>
                   </tr>
                 {% endfor %}

@@ -24,7 +24,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                {% for operative_system in object_list_inactive %}
+                {% for operative_system in object_list %}
                   <tr>
                       <td>{{ forloop.counter }}</td>
                       <td>{{ operative_system.id_operative_system }}</td>
@@ -32,7 +32,7 @@
                       <td>{{ operative_system.description }}</td>
                       <td>{{ operative_system.updated_at }}</td>
                       <td>{{ operative_system.created_at }}</td>
-                      <td><span class="badge badge-danger">{{ operative_system.status }}</span></td>
+                      <td><span class="badge badge-danger">INACTIVO</span></td>
                       <td>
                         <a href="{% url 'operative_system_update' operative_system.id_operative_system %}" class="btn btn-primary p-1">
                           <img src="{% static 'assets/img/icons/update-icon.svg' %}" alt="" height="20px" width="20px">

@@ -8,7 +8,7 @@ class FormSubCategory(forms.ModelForm):
             attrs={
                 'id': 'name_category',
                 'class': 'form-control',
-                'placeholder': 'Nombre de la Categoría',
+                'placeholder': 'Nombre de la Subcategoría',
                 'min-lenght': 1,
                 'max-lenght': 100
             }

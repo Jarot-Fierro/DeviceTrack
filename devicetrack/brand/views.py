@@ -23,7 +23,6 @@ class BaseBrandFormView(TemplateView, FormMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['object_list'] = Brand.objects.all().filter(status='ACTIVE').order_by('-updated_at')
-        context['object_list_inactive'] = Brand.objects.all().filter(status='INACTIVE').order_by('-updated_at')
 
         return context
 
@@ -87,7 +86,19 @@ class BrandToggleStatusView(View):
         save_history_standard(request, instance, 'toggle')
 
         messages.success(request, 'El estado del registro fue actualizado correctamente')
-        return redirect('brand_list')
+
+        if instance.status == 'ACTIVE':
+            return redirect('brand_deleted_records')
+        else:
+            return redirect('brand_list')
+
+
+class BrandDeletedRecordsView(ListView):
+    model = Brand
+    template_name = 'brand_list_deleted_records.html'
+
+    def get_queryset(self):
+        return Brand.objects.all().filter(status='INACTIVE').order_by('-updated_at')
 
 
 class BrandHistoryView(ListView):
@@ -96,3 +107,4 @@ class BrandHistoryView(ListView):
 
     def get_queryset(self):
         return BrandHistory.objects.all().order_by('-updated_at')
+

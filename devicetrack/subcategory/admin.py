@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import SubCategory, SubCategoryHistory
 
-# Register your models here.
+
+admin.site.register(SubCategory)
+admin.site.register(SubCategoryHistory)

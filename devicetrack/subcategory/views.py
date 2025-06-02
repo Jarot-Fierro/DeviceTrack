@@ -22,7 +22,6 @@ class BaseSubCategoryFormView(TemplateView, FormMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['object_list'] = SubCategory.objects.all().filter(status='ACTIVE').order_by('-updated_at')
-        context['object_list_inactive'] = SubCategory.objects.all().filter(status='INACTIVE').order_by('-updated_at')
 
         return context
 
@@ -92,6 +91,14 @@ class SubCategoryToggleStatusView(View):
         messages.success(request, 'El estado del registro fue actualizado correctamente')
 
         return redirect('subcategory_list')
+
+
+class SubCategoryDeletedRecordsView(ListView):
+    model = SubCategoryHistory
+    template_name = 'subcategory_list_deleted_records.html'
+
+    def get_queryset(self):
+        return SubCategory.objects.all().filter(status='INACTIVE').order_by('-updated_at')
 
 
 class SubCategoryHistoryView(ListView):

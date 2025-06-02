@@ -23,7 +23,6 @@ class BaseOperativeSystemFormView(TemplateView, FormMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['object_list'] = OperativeSystem.objects.all().filter(status='ACTIVE').order_by('-updated_at')
-        context['object_list_inactive'] = OperativeSystem.objects.all().filter(status='INACTIVE').order_by('-updated_at')
 
         return context
 
@@ -87,7 +86,19 @@ class OperativeSystemToggleStatusView(View):
         save_history_standard(request, instance, 'toggle')
 
         messages.success(request, 'El estado del registro fue actualizado correctamente')
-        return redirect('operative_system_list')
+
+        if instance.status == 'ACTIVE':
+            return redirect('operative_system_deleted_records')
+        else:
+            return redirect('operative_system_list')
+
+
+class OperativeSystemDeletedRecordsView(ListView):
+    model = OperativeSystem
+    template_name = 'operative_system_list_deleted_records.html'
+
+    def get_queryset(self):
+        return OperativeSystem.objects.all().filter(status='INACTIVE').order_by('-updated_at')
 
 
 class OperativeSystemHistoryView(ListView):

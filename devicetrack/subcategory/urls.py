@@ -3,7 +3,8 @@ from .views import *
 
 urlpatterns = [
     path('crear/', SubCategoryCreateView.as_view(), name='subcategory_list'),
-    path('actualizar/<uuid:pk>', SubCategoryUpdateView.as_view(), name='subcategory_update'),
+    path('actualizar/<uuid:pk>/', SubCategoryUpdateView.as_view(), name='subcategory_update'),
     path('estado/<uuid:pk>', SubCategoryToggleStatusView.as_view(), name='subcategory_toggle_status'),
+    path('registros/eliminados', SubCategoryDeletedRecordsView.as_view(), name='subcategory_deleted_records'),
     path('historial/', SubCategoryHistoryView.as_view(), name='subcategory_history'),
 ]

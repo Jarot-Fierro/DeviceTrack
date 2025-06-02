@@ -23,7 +23,6 @@ class BasePlanFormView(TemplateView, FormMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['object_list'] = Plan.objects.all().filter(status='ACTIVE').order_by('-updated_at')
-        context['object_list_inactive'] = Plan.objects.all().filter(status='INACTIVE').order_by('-updated_at')
 
         return context
 
@@ -142,6 +141,14 @@ class PlanCancellationUpdateView(BasePlanCancellationFormView, ProcessFormView):
     def form_valid(self, form):
         form.save()
         return redirect('plan_list')
+
+
+class PlanDeletedRecordsView(ListView):
+    model = Plan
+    template_name = 'plan_list_deleted_records.html'
+
+    def get_queryset(self):
+        return Plan.objects.all().filter(status='INACTIVE').order_by('-updated_at')
 
 
 class PlanHistoryView(ListView):

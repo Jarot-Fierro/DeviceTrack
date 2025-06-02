@@ -22,7 +22,6 @@ class BaseCompanyFormView(TemplateView, FormMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['object_list'] = Company.objects.all().filter(status='ACTIVE').order_by('-updated_at')
-        context['object_list_inactive'] = Company.objects.all().filter(status='INACTIVE').order_by('-updated_at')
 
         return context
 
@@ -87,6 +86,14 @@ class CompanyToggleStatusView(View):
 
         messages.success(request, 'El estado del registro fue actualizado correctamente')
         return redirect('company_list')
+
+
+class CompanyDeletedRecordsView(ListView):
+    model = Company
+    template_name = 'company_list_deleted_records.html'
+
+    def get_queryset(self):
+        return Company.objects.all().filter(status='INACTIVE').order_by('-updated_at')
 
 
 class CompanyHistoryView(ListView):

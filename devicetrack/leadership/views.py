@@ -23,7 +23,6 @@ class BaseLeadershipFormView(TemplateView, FormMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['object_list'] = Leadership.objects.all().filter(status='ACTIVE').order_by('-updated_at')
-        context['object_list_inactive'] = Leadership.objects.all().filter(status='INACTIVE').order_by('-updated_at')
 
         return context
 
@@ -87,7 +86,19 @@ class LeadershipToggleStatusView(View):
         save_history_standard(request, instance, 'toggle')
 
         messages.success(request, 'El estado de la marca fue actualizada correctamente')
-        return redirect('leadership_list')
+
+        if instance.status == 'ACTIVE':
+            return redirect('leadership_deleted_records')
+        else:
+            return redirect('leadership_list')
+
+
+class LeadershipDeletedRecordsView(ListView):
+    model = Leadership
+    template_name = 'leadership_list_deleted_records.html'
+
+    def get_queryset(self):
+        return Leadership.objects.all().filter(status='INACTIVE').order_by('-updated_at')
 
 
 class LeadershipHistoryView(ListView):

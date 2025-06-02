@@ -1,21 +1,18 @@
 {% extends 'Base/base.html' %}
 {% load static %}
 
-{% block title %}Sistemas Operativos{% endblock %}
+{% block title %}Propietario Equipo{% endblock %}
 
 {% block historic %}
   <a href="#" class="btn btn-label-success btn-round me-2">Reporte</a>
-  <a href="{% url 'operative_system_deleted_records' %}" class="btn btn-label-danger btn-round me-2">Registros Eliminados</a>
-  <a href="{% url 'operative_system_list' %}" class="btn btn-label-info btn-round me-2">Mantenedor</a>
+  <a href="{% url 'device_owner_list' %}" class="btn btn-label-info btn-round me-2">Mantenedor</a>
 {% endblock %}
 
 {% block content %}
 
-<!-- DATA TABLE ACTIVE -->
-    {% include 'components/operative_system_datatable_history.html' %}
-<!-- END DATA TABLE ACTIVE-->
-
-
+<!-- DATA TABLE INACTIVE -->
+    {% include 'components/device_owner_datatable_inactive.html' %}
+<!-- END DATA TABLE INACTIVE-->
 {% endblock %}
 
 
@@ -23,5 +20,6 @@
   <!-- Datatables -->
   <script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
   <script src="{% static 'assets/js/plugin/datatables/datatables_def.js' %}"></script>
+  <script src="{% static 'assets/js/plugin/sweetalert/sweetalert_popup.js' %}"></script>
 
 {% endblock %}

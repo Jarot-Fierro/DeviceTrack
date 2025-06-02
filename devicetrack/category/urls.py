@@ -5,5 +5,6 @@ urlpatterns = [
     path('crear/', CategoryCreateView.as_view(), name='category_list'),
     path('actualizar/<uuid:pk>', CategoryUpdateView.as_view(), name='category_update'),
     path('estado/<uuid:pk>', CategoryToggleStatusView.as_view(), name='category_toggle_status'),
+    path('registros/eliminados', CategoryDeletedRecordsView.as_view(), name='category_deleted_records'),
     path('historial/', CategoryHistoryView.as_view(), name='category_history'),
 ]

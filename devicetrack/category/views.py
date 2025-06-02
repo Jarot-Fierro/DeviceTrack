@@ -22,7 +22,6 @@ class BaseCategoryFormView(TemplateView, FormMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['object_list'] = Category.objects.all().filter(status='ACTIVE').order_by('-updated_at')
-        context['object_list_inactive'] = Category.objects.all().filter(status='INACTIVE').order_by('-updated_at')
 
         return context
 
@@ -90,7 +89,18 @@ class CategoryToggleStatusView(View):
 
         messages.success(request, 'El estado del registro fue actualizado correctamente')
 
-        return redirect('category_list')
+        if instance.status == 'ACTIVE':
+            return redirect('category_deleted_records')
+        else:
+            return redirect('category_list')
+
+
+class CategoryDeletedRecordsView(ListView):
+    model = CategoryHistory
+    template_name = 'category_list_deleted_records.html'
+
+    def get_queryset(self):
+        return Category.objects.all().filter(status='INACTIVE').order_by('-updated_at')
 
 
 class CategoryHistoryView(ListView):

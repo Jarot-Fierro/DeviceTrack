@@ -15,8 +15,7 @@
                   <tr>
                     <th>#</th>
                     <th>ID</th>
-                    <th>PosModificación</th>
-                    <th>PreModificación</th>
+                    <th>Modificación</th>
                     <th>F. Creación</th>
                     <th>Usuario Responsable</th>
                     <th>Operación</th>
@@ -30,35 +29,21 @@
                       <td>
                           <ul>
                               <li>ID: {{ device_owner.id_device_owner }}</li>
-                              <li>Nombre: {{ device_owner.new_data.name }}</li>
-                              <li>Nombre: {{ device_owner.new_data.description }}</li>
+                              <li>Nombre: {{ device_owner.data.name }}</li>
+                              <li>Nombre: {{ device_owner.data.description }}</li>
                               <li>Estado:
-                                    <strong class="{% if device_owner.new_data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
-                                        {% if device_owner.new_data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
+                                    <strong class="{% if device_owner.data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
+                                        {% if device_owner.data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
                                     </strong>
                               </li>
                           </ul>
                       </td>
-                      <td>
-                          <ul>
-                              {% if not device_owner.operation == 'create' %}
-                                <li>ID: {{ device_owner.id_device_owner }}</li>
-                                <li>Nombre: {{ device_owner.old_data.name }}</li>
-                                <li>Nombre: {{ device_owner.old_data.description }}</li>
-                                <li>Estado:
-                                    <strong class="{% if device_owner.old_data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
-                                        {% if device_owner.old_data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
-                                    </strong>
-                                </li>
-                              {% else %}
-                                <li>No hay registros anteriores</li>
-                              {% endif %}
-                          </ul>
-                      </td>
                       <td>{{ device_owner.timestamp }}</td>
                       <td>{{ device_owner.user_login }}</td>
-                      <td class="{% if device_owner.operation == 'create' %}text-success{% elif device_owner.operation == 'update' %}text-primary{% else %}text-danger{% endif %}">
-                          {% if device_owner.operation == 'create' %}Creación{% elif device_owner.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                       <td>
+                          <span class="badge {% if device_owner.operation == 'create' %}badge-success{% elif device_owner.operation == 'update' %}badge-primary{% else %}badge-warning{% endif %}">
+                              {% if device_owner.operation == 'create' %}Creación{% elif device_owner.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                          </span>
                       </td>
                   </tr>
                 {% endfor %}

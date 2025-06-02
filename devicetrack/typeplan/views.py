@@ -23,7 +23,6 @@ class BaseTypePlanFormView(TemplateView, FormMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['object_list'] = TypePlan.objects.all().filter(status='ACTIVE').order_by('-updated_at')
-        context['object_list_inactive'] = TypePlan.objects.all().filter(status='INACTIVE').order_by('-updated_at')
 
         return context
 
@@ -88,6 +87,14 @@ class TypePlanToggleStatusView(View):
 
         messages.success(request, 'El estado del registro fue actualizado correctamente')
         return redirect('type_plan_list')
+
+
+class TypePlanDeletedRecordsView(ListView):
+    model = TypePlan
+    template_name = 'type_plan_list_deleted_records.html'
+
+    def get_queryset(self):
+        return TypePlan.objects.all().filter(status='INACTIVE').order_by('-updated_at')
 
 
 class TypePlanHistoryView(ListView):

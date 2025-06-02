@@ -16,7 +16,15 @@
                     <th>#</th>
                     <th>ID</th>
                     <th>Plan</th>
+                    <th>Tipo Plan</th>
+                    <th>Datos</th>
+                    <th>Minutos</th>
+                    <th>Mensajes</th>
+                    <th>Precio</th>
+                    <th>Contrato</th>
                     <th>F. Contratación</th>
+                    <th>F. Cancelación</th>
+                    <th>Motivo</th>
                     <th>F. Modificación</th>
                     <th>F. Creación</th>
                     <th>Estado</th>
@@ -24,15 +32,67 @@
                   </tr>
                 </thead>
                 <tbody>
-                {% for plan in object_list_inactive %}
+                {% for plan in object_list %}
                   <tr>
                       <td>{{ forloop.counter }}</td>
                       <td>{{ plan.id_plan }}</td>
                       <td>{{ plan.name }}</td>
-                      <td>{{ plan.date_hiring }}</td>
+                      <td>{{ plan.type_plan.name }}</td>
+                      <td>
+                          {% if plan.unlimited_gigabytes == True %}
+                            Ilimitado
+                          {% else %}
+                            {{ plan.gigabytes }}
+                          {% endif %}
+                      </td>
+                      <td>
+                          {% if plan.unlimited_minutes == True %}
+                            Ilimitado
+                          {% else %}
+                            {{ plan.minutes }}
+                          {% endif %}
+                      </td>
+                      <td>
+                          {% if plan.unlimited_messages == True %}
+                            Ilimitado
+                          {% else %}
+                            {{ plan.messages }}
+                          {% endif %}
+                      </td>
+                      <td>{{ plan.price }}</td>
+                      <td>
+                          {% if plan.old_data.status_billing == 'PAYING' %}
+                            Pagando
+                          {% elif plan.old_data.status_billing == 'CANCELED' %}
+                            Cancelado
+                          {% else %}
+                            Pendiente
+                          {% endif %}
+                      </td>
+                      <td>
+                          {% if plan.date_hiring == None %}
+                            No cumple
+                          {% else %}
+                            {{ plan.date_hiring }}
+                          {% endif %}
+                      </td>
+                      <td>
+                          {% if plan.date_cancellation == None %}
+                            No cumple
+                          {% else %}
+                            {{ plan.date_cancellation }}
+                          {% endif %}
+                      </td>
+                      <td>
+                          {% if plan.reason_cancellation == None %}
+                            No cumple
+                          {% else %}
+                            {{ plan.reason_cancellation }}
+                          {% endif %}
+                      </td>
                       <td>{{ plan.updated_at }}</td>
                       <td>{{ plan.created_at }}</td>
-                      <td><span class="badge badge-danger">{{ plan.status }}</span></td>
+                      <td><span class="badge badge-danger">INACTIVO</span></td>
                       <td>
                         <a href="{% url 'plan_update' plan.id_plan %}" class="btn btn-primary p-1">
                           <img src="{% static 'assets/img/icons/update-icon.svg' %}" alt="" height="20px" width="20px">
@@ -40,6 +100,7 @@
                         <a href="{% url 'plan_toggle_status' plan.id_plan %}" class="btn btn-success p-1 toggle-status-btn">
                             <img src="{% static 'assets/img/icons/trash-can-icon.svg' %}" alt="" height="20px" width="20px">
                         </a>
+
                       </td>
                   </tr>
                 {% endfor %}

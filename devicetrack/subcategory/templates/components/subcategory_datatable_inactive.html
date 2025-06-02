@@ -24,7 +24,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                {% for subcategory in object_list_inactive %}
+                {% for subcategory in object_list %}
                   <tr>
                       <td>{{ forloop.counter }}</td>
                       <td>{{ subcategory.id_subcategory }}</td>
@@ -32,7 +32,7 @@
                       <td>{{ subcategory.category.name }}</td>
                       <td>{{ subcategory.updated_at }}</td>
                       <td>{{ subcategory.created_at }}</td>
-                      <td><span class="badge badge-danger">{{ subcategory.status }}</span></td>
+                      <td><span class="badge badge-danger">INACTIVO</span></td>
                       <td>
                         <a href="{% url 'subcategory_update' subcategory.id_subcategory %}" class="btn btn-primary p-1">
                           <img src="{% static 'assets/img/icons/update-icon.svg' %}" alt="" height="20px" width="20px">

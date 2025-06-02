@@ -5,6 +5,7 @@
 
 {% block historic %}
   <a href="#" class="btn btn-label-success btn-round me-2">Reporte</a>
+  <a href="{% url 'brand_deleted_records' %}" class="btn btn-label-danger btn-round me-2">Registros Eliminados</a>
   <a href="{% url 'brand_list' %}" class="btn btn-label-info btn-round me-2">Mantenedor</a>
 {% endblock %}
 
