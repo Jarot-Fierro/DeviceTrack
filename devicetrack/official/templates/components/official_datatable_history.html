@@ -1,0 +1,63 @@
+{% load static %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Histórico</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table
+                            id="multi-filter-select"
+                            class="display table table-striped table-hover"
+                    >
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>Modificación</th>
+                            <th>F. Creación</th>
+                            <th>Usuario Responsable</th>
+                            <th>Operación</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for official in object_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ official.id_official_history }}</td>
+                            <td>
+                                <ul>
+                                    <li>ID: {{ official.id_official }}</li>
+                                    <li>RUT: {{ official.data.rut }}</li>
+                                    <li>RUT: {{ official.data.first_names }}</li>
+                                    <li>RUT: {{ official.data.pather_surname }}</li>
+                                    <li>RUT: {{ official.data.mather_surname }}</li>
+                                    <li>Correo: {{ official.data.email }}</li>
+                                    <li>Cargo: {{ official.data.boss_position }}</li>
+                                    <li>Estado:
+                                        <strong class="{% if official.data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
+                                            {% if official.data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif
+                                            %}
+                                        </strong>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>{{ official.timestamp }}</td>
+                            <td>{{ official.user_login }}</td>
+                            <td>
+                          <span class="badge {% if official.operation == 'create' %}badge-success{% elif official.operation == 'update' %}badge-primary{% else %}badge-warning{% endif %}">
+                              {% if official.operation == 'create' %}Creación{% elif official.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                          </span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

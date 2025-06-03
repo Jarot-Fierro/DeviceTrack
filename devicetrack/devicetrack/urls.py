@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+
 from core import views
 
 urlpatterns = [
@@ -32,4 +33,5 @@ urlpatterns = [
     path('tipoPlan/', include('typeplan.urls')),
     path('plan/', include('plan.urls')),
     path('chip/', include('chip.urls')),
+    path('usuarios/', include('official.urls')),
 ]
