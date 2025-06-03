@@ -1,53 +1,57 @@
 {% load static %}
 <div class="row">
     <div class="col-md-12">
-       <div class="card">
-          <div class="card-header">
-            <h4 class="card-title">Registros Deshabilitados</h4>
-          </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table
-                id="multi-filter-select-2"
-                class="display table table-striped table-hover"
-              >
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>ID</th>
-                    <th>Propietario</th>
-                    <th>Descripción</th>
-                    <th>F. Modificación</th>
-                    <th>F. Creación</th>
-                    <th>Estado</th>
-                    <th>Acción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {% for device_owner in object_list %}
-                  <tr>
-                      <td>{{ forloop.counter }}</td>
-                      <td>{{ device_owner.id_device_owner }}</td>
-                      <td>{{ device_owner.name }}</td>
-                      <td>{{ device_owner.description }}</td>
-                      <td>{{ device_owner.updated_at }}</td>
-                      <td>{{ device_owner.created_at }}</td>
-                      <td><span class="badge badge-danger">INACTIVO</span></td>
-                      <td>
-                        <a href="{% url 'device_owner_update' device_owner.id_device_owner %}" class="btn btn-primary p-1">
-                          <img src="{% static 'assets/img/icons/update-icon.svg' %}" alt="" height="20px" width="20px">
-                        </a>
-                        <a href="{% url 'device_owner_toggle_status' device_owner.id_device_owner %}" class="btn btn-success p-1 toggle-status-btn">
-                            <img src="{% static 'assets/img/icons/trash-can-icon.svg' %}" alt="" height="20px" width="20px">
-                        </a>
-                      </td>
-                  </tr>
-                {% endfor %}
-                </tbody>
-              </table>
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Registros Deshabilitados</h4>
             </div>
-          </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table
+                            id="multi-filter-select-2"
+                            class="display table table-striped table-hover"
+                    >
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>Propietario</th>
+                            <th>Descripción</th>
+                            <th>F. Modificación</th>
+                            <th>F. Creación</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for device_owner in object_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ device_owner.id_device_owner }}</td>
+                            <td>{{ device_owner.name }}</td>
+                            <td>{{ device_owner.description }}</td>
+                            <td>{{ device_owner.updated_at }}</td>
+                            <td>{{ device_owner.created_at }}</td>
+                            <td><span class="badge badge-danger">INACTIVO</span></td>
+                            <td>
+                                <a href="{% url 'device_owner_update' device_owner.id_device_owner %}"
+                                   class="btn btn-primary p-1">
+                                    <img src="{% static 'assets/img/icons/update-icon.svg' %}" alt="" height="20px"
+                                         width="20px">
+                                </a>
+                                <a href="{% url 'device_owner_toggle_status' device_owner.id_device_owner %}"
+                                   class="btn btn-success p-1 toggle-status-btn">
+                                    <img src="{% static 'assets/img/icons/trash-can-icon.svg' %}" alt="" height="20px"
+                                         width="20px">
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
-  </div>
+    </div>
+</div>
 

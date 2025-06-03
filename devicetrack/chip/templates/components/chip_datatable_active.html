@@ -1,57 +1,60 @@
 {% load static %}
 <div class="row">
     <div class="col-md-12">
-       <div class="card">
-          <div class="card-header">
-            <h4 class="card-title">Registros Habilitados</h4>
-          </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table
-                id="multi-filter-select"
-                class="display table table-striped table-hover"
-              >
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>ID</th>
-                    <th>Número</th>
-                    <th>Compañía</th>
-                    <th>Plan</th>
-                    <th>F. Modificación</th>
-                    <th>F. Creación</th>
-                    <th>Estado</th>
-                    <th>Acción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {% for chip in object_list %}
-                  <tr>
-                      <td>{{ forloop.counter }}</td>
-                      <td>{{ chip.id_chip }}</td>
-                      <td>{{ chip.number_phone }}</td>
-                      <td>{{ chip.company }}</td>
-                      <td>{{ chip.plan }}</td>
-                      <td>{{ chip.updated_at }}</td>
-                      <td>{{ chip.created_at }}</td>
-                      <td><span class="badge badge-success">{{ chip.status }}</span></td>
-                      <td>
-                        <a href="{% url 'chip_update' chip.id_chip %}" class="btn btn-primary p-1">
-                          <img src="{% static 'assets/img/icons/update-icon.svg' %}" alt="" height="20px" width="20px">
-                        </a>
-                        <a href="{% url 'chip_toggle_status' chip.id_chip %}" class="btn btn-danger p-1 toggle-status-btn">
-                            <img src="{% static 'assets/img/icons/trash-icon.svg' %}" alt="" height="20px" width="20px">
-                        </a>
-
-                      </td>
-                  </tr>
-                {% endfor %}
-                </tbody>
-              </table>
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Registros Habilitados</h4>
             </div>
-          </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table
+                            id="multi-filter-select"
+                            class="display table table-striped table-hover"
+                    >
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>Número</th>
+                            <th>Compañía</th>
+                            <th>Plan</th>
+                            <th>F. Modificación</th>
+                            <th>F. Creación</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for chip in object_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ chip.id_chip }}</td>
+                            <td>{{ chip.number_phone }}</td>
+                            <td>{{ chip.company }}</td>
+                            <td>{{ chip.plan }}</td>
+                            <td>{{ chip.updated_at }}</td>
+                            <td>{{ chip.created_at }}</td>
+                            <td><span class="badge badge-success">{{ chip.status }}</span></td>
+                            <td>
+                                <a href="{% url 'chip_update' chip.id_chip %}" class="btn btn-primary p-1">
+                                    <img src="{% static 'assets/img/icons/update-icon.svg' %}" alt="" height="20px"
+                                         width="20px">
+                                </a>
+                                <a href="{% url 'chip_toggle_status' chip.id_chip %}"
+                                   class="btn btn-danger p-1 toggle-status-btn">
+                                    <img src="{% static 'assets/img/icons/trash-icon.svg' %}" alt="" height="20px"
+                                         width="20px">
+                                </a>
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
-  </div>
+    </div>
+</div>
 
 

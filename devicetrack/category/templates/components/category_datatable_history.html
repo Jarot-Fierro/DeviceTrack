@@ -1,57 +1,57 @@
 {% load static %}
 <div class="row">
     <div class="col-md-12">
-       <div class="card">
-          <div class="card-header">
-              <h4 class="card-title">Histórico</h4>
-          </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table
-                id="multi-filter-select"
-                class="display table table-striped table-hover"
-              >
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>ID</th>
-                    <th>Modificación</th>
-                    <th>F. Creación</th>
-                    <th>Usuario Responsable</th>
-                    <th>Operación</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {% for category in object_list %}
-                  <tr>
-                      <td>{{ forloop.counter }}</td>
-                      <td>{{ category.id_category_history }}</td>
-                      <td>
-                          <ul>
-                              <li>ID: {{ category.id_category }}</li>
-                              <li>Nombre: {{ category.data.name }}</li>
-                              <li>Estado:
-                                    <strong class="{% if category.data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
-                                        {% if category.data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
-                                    </strong>
-                              </li>
-                          </ul>
-                      </td>
-                      <td>{{ category.timestamp }}</td>
-                      <td>{{ category.user_login }}</td>
-                      <td>
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Histórico</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table
+                            id="multi-filter-select"
+                            class="display table table-striped table-hover"
+                    >
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>Modificación</th>
+                            <th>F. Creación</th>
+                            <th>Usuario Responsable</th>
+                            <th>Operación</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for category in object_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ category.id_category_history }}</td>
+                            <td>
+                                <ul>
+                                    <li>ID: {{ category.id_category }}</li>
+                                    <li>Nombre: {{ category.data.name }}</li>
+                                    <li>Estado:
+                                        <strong class="{% if category.data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
+                                            {% if category.data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
+                                        </strong>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>{{ category.timestamp }}</td>
+                            <td>{{ category.user_login }}</td>
+                            <td>
                           <span class="badge {% if category.operation == 'create' %}badge-success{% elif category.operation == 'update' %}badge-primary{% else %}badge-warning{% endif %}">
                               {% if category.operation == 'create' %}Creación{% elif category.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
                           </span>
-                      </td>
-                  </tr>
-                {% endfor %}
-                </tbody>
-              </table>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-  </div>
+    </div>
+</div>
 
 

@@ -1,64 +1,64 @@
 <form method="post">
     {% csrf_token %}
     <div class="col-md-12">
-      <div class="card">
-        <div class="card-header">
-          <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2">
-            <div>
-              <div class="card-title">
-                Acción {% if id_subcategory %}Actualizar{% else %}Crear{% endif %}
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2">
+                    <div>
+                        <div class="card-title">
+                            Acción {% if id_subcategory %}Actualizar{% else %}Crear{% endif %}
 
-              </div>
-            </div>
-            <div class="ms-md-auto py-2 py-md-0">
-              {% if id_subcategory %}
-                <a href="{% url 'subcategory_list' %}" class="btn btn-secondary btn-round">Ir a Crear</a>
-              {% endif %}
-              <button type="submit" class="btn btn-primary btn-round">Guardar</button>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="card-body">
-          <div class="row">
-            {% if id_subcategory%}
-              <div class="col-md-4 col-lg-4">
-                <div class="form-group">
-                    <label for="disableinput">ID.</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="disableinput"
-                      placeholder=""
-                      value="{{ id_subcategory }}"
-                      disabled
-                    />
+                        </div>
+                    </div>
+                    <div class="ms-md-auto py-2 py-md-0">
+                        {% if id_subcategory %}
+                        <a href="{% url 'subcategory_list' %}" class="btn btn-secondary btn-round">Ir a Crear</a>
+                        {% endif %}
+                        <button type="submit" class="btn btn-primary btn-round">Guardar</button>
+                    </div>
                 </div>
-              </div>
-            {% endif %}
-            <div class="col-md-4 col-lg-4">
-              <div class="form-group">
-                <label>Nombre de la Subcategoría.</label>
-                {{ form.name }}
-                {% if form.name.errors %}
-                  <div class="text-danger">{{ form.name.errors }}</div>
-                {% endif %}
-              </div>
+
             </div>
-            <div class="col-md-4 col-lg-4">
-              <div class="form-group">
-                <label>Categoría a la que pertenece.</label>
-                {{ form.category }}
-                {% if form.category.errors %}
-                  <div class="text-danger">{{ form.category.errors }}</div>
-                {% endif %}
-              </div>
+
+            <div class="card-body">
+                <div class="row">
+                    {% if id_subcategory%}
+                    <div class="col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label for="disableinput">ID.</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    id="disableinput"
+                                    placeholder=""
+                                    value="{{ id_subcategory }}"
+                                    disabled
+                            />
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Nombre de la Subcategoría.</label>
+                            {{ form.name }}
+                            {% if form.name.errors %}
+                            <div class="text-danger">{{ form.name.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Categoría a la que pertenece.</label>
+                            {{ form.category }}
+                            {% if form.category.errors %}
+                            <div class="text-danger">{{ form.category.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </form>
+</form>
 
 

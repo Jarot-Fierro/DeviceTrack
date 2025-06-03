@@ -1,102 +1,145 @@
 {% load static %}
 <div class="sidebar" data-background-color="dark">
     <div class="sidebar-logo">
-      <!-- Logo Header -->
-      {% include 'Sidebar-Logo/sidebar-logo.html' %}
-      <!-- End Logo Header -->
+        <!-- Logo Header -->
+        {% include 'Sidebar-Logo/sidebar-logo.html' %}
+        <!-- End Logo Header -->
     </div>
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
-      <div class="sidebar-content">
-        <ul class="nav nav-secondary">
-          <li class="nav-item active">
-            <a
-              data-bs-toggle="collapse"
-              href="#dashboard"
-              class="collapsed"
-              aria-expanded="false"
-            >
-              <img class="me-2" src="{% static 'assets/img/icons/maintainer-icon.svg' %}" alt="Icono de Carpeta" width="20px" height="20px">
-              <p>Mantenedores</p>
-              <span class="caret"></span>
-            </a>
-            <div class="collapse" id="dashboard">
-              <ul class="nav nav-collapse">
-                <li>
-                  <a href="{% url 'brand_list' %}">
-                    <span class="sub-item">Marcas</span>
-                  </a>
+        <div class="sidebar-content">
+            <ul class="nav nav-secondary">
+                <li class="nav-item active">
+                    <a
+                            data-bs-toggle="collapse"
+                            href="#dashboard"
+                            class="collapsed"
+                            aria-expanded="false"
+                    >
+                        <img
+                                class="me-2"
+                                src="{% static 'assets/img/icons/maintainer-icon.svg' %}"
+                                alt="Icono de Carpeta"
+                                width="20px"
+                                height="20px"
+                        />
+                        <p>Mantenedores</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="dashboard">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="{% url 'brand_list' %}">
+                                    <span class="sub-item">Marcas</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'category_list' %}">
+                                    <span class="sub-item">Categorías</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'subcategory_list' %}">
+                                    <span class="sub-item">Subcategorías</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'model_list' %}">
+                                    <span class="sub-item">Modelos</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'leadership_list' %}">
+                                    <span class="sub-item">Jefe Tic</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'operative_system_list' %}">
+                                    <span class="sub-item">Sistemas Operativos</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'device_owner_list' %}">
+                                    <span class="sub-item">Propietario Equipo</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
-                <li>
-                  <a href="{% url 'category_list' %}">
-                    <span class="sub-item">Categorías</span>
-                  </a>
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#base">
+                        <img
+                                class="me-2"
+                                src="{% static 'assets/img/icons/mobile-icon.svg' %}"
+                                alt="Icono de Carpeta"
+                                width="20px"
+                                height="20px"
+                        />
+                        <p>Plan / Chips</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="base">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="{% url 'company_list' %}">
+                                    <span class="sub-item">Compañías</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'type_plan_list' %}">
+                                    <span class="sub-item">Tipo de Plan</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'plan_list' %}">
+                                    <span class="sub-item">Datos del Plan</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'chip_list' %}">
+                                    <span class="sub-item">Chip</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
-                <li>
-                  <a href="{% url 'subcategory_list' %}">
-                    <span class="sub-item">Subcategorías</span>
-                  </a>
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#form">
+                        <img
+                                class="me-2"
+                                src="{% static 'assets/img/icons/mobile-icon.svg' %}"
+                                alt="Icono de Carpeta"
+                                width="20px"
+                                height="20px"
+                        />
+                        <p>Equipos</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="form">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="{% url 'company_list' %}">
+                                    <span class="sub-item">Celulares</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'type_plan_list' %}">
+                                    <span class="sub-item">Computadores</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'plan_list' %}">
+                                    <span class="sub-item">Impresoras</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'chip_list' %}">
+                                    <span class="sub-item">Otros Equipos</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
-                <li>
-                  <a href="{% url 'model_list' %}">
-                    <span class="sub-item">Modelos</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="{% url 'leadership_list' %}">
-                    <span class="sub-item">Jefe Tic</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="{% url 'operative_system_list' %}">
-                    <span class="sub-item">Sistemas Operativos</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="{% url 'device_owner_list' %}">
-                    <span class="sub-item">Propietario Equipo</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-section">
-            <span class="sidebar-mini-icon">
-              <i class="fa fa-ellipsis-h"></i>
-            </span>
-            <h4 class="text-section">Dispositivos</h4>
-          </li>
-          <li class="nav-item">
-            <a data-bs-toggle="collapse" href="#base">
-              <img class="me-2" src="{% static 'assets/img/icons/mobile-icon.svg' %}" alt="Icono de Carpeta" width="20px" height="20px">
-              <p>Teléfonos Celulares</p>
-              <span class="caret"></span>
-            </a>
-            <div class="collapse" id="base">
-              <ul class="nav nav-collapse">
-                <li>
-                  <a href="{% url 'company_list' %}">
-                    <span class="sub-item">Compañías</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="{% url 'type_plan_list' %}">
-                    <span class="sub-item">Tipo de Plan</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="{% url 'plan_list' %}">
-                    <span class="sub-item">Datos del Plan</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="{% url 'chip_list' %}">
-                    <span class="sub-item">Chip</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </div>
+            </ul>
+        </div>
     </div>
-  </div>
+</div>

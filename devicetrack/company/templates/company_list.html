@@ -4,22 +4,22 @@
 {% block title %}Compañías{% endblock %}
 
 {% block historic %}
-    <a href="#" class="btn btn-label-success btn-round me-2">Reporte</a>
-    <a href="{% url 'company_deleted_records' %}" class="btn btn-label-danger btn-round me-2">Registros Eliminados</a>
-    <a href="{% url 'company_history' %}" class="btn btn-label-info btn-round me-2">Histórico</a>
+<a href="#" class="btn btn-label-success btn-round me-2">Reporte</a>
+<a href="{% url 'company_deleted_records' %}" class="btn btn-label-danger btn-round me-2">Registros Eliminados</a>
+<a href="{% url 'company_history' %}" class="btn btn-label-info btn-round me-2">Histórico</a>
 {% endblock %}
 
 {% block content %}
 
 <!--  FORM -->
-    <div class="row">
-      {% include 'components/company_form.html' %}
-    </div>
+<div class="row">
+    {% include 'components/company_form.html' %}
+</div>
 <!-- END FORM  -->
 
 
 <!-- DATA TABLE ACTIVE -->
-    {% include 'components/company_datatable_active.html' %}
+{% include 'components/company_datatable_active.html' %}
 <!-- END DATA TABLE ACTIVE-->
 
 
@@ -27,9 +27,9 @@
 
 
 {% block section_scripts %}
-  <!-- Datatables -->
-  <script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
-  <script src="{% static 'assets/js/plugin/datatables/datatables_def.js' %}"></script>
-  <script src="{% static 'assets/js/plugin/sweetalert/sweetalert_popup.js' %}"></script>
+<!-- Datatables -->
+<script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
+<script src="{% static 'assets/js/plugin/datatables/datatables_def.js' %}"></script>
+<script src="{% static 'assets/js/plugin/sweetalert/sweetalert_popup.js' %}"></script>
 
 {% endblock %}

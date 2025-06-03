@@ -1,53 +1,56 @@
 {% load static %}
 <div class="row">
     <div class="col-md-12">
-       <div class="card">
-          <div class="card-header">
-            <h4 class="card-title">Registros Habilitados</h4>
-          </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table
-                id="multi-filter-select"
-                class="display table table-striped table-hover"
-              >
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>ID</th>
-                    <th>Marca</th>
-                    <th>F. Modificación</th>
-                    <th>F. Creación</th>
-                    <th>Estado</th>
-                    <th>Acción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {% for model in object_list %}
-                  <tr>
-                      <td>{{ forloop.counter }}</td>
-                      <td>{{ model.id_model }}</td>
-                      <td>{{ model.name }}</td>
-                      <td>{{ model.updated_at }}</td>
-                      <td>{{ model.created_at }}</td>
-                      <td><span class="badge badge-success">ACTIVO</span></td>
-                      <td>
-                        <a href="{% url 'model_update' model.id_model %}" class="btn btn-primary p-1">
-                          <img src="{% static 'assets/img/icons/update-icon.svg' %}" alt="" height="20px" width="20px">
-                        </a>
-                        <a href="{% url 'model_toggle_status' model.id_model %}" class="btn btn-danger p-1 toggle-status-btn">
-                            <img src="{% static 'assets/img/icons/trash-icon.svg' %}" alt="" height="20px" width="20px">
-                        </a>
-
-                      </td>
-                  </tr>
-                {% endfor %}
-                </tbody>
-              </table>
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Registros Habilitados</h4>
             </div>
-          </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table
+                            id="multi-filter-select"
+                            class="display table table-striped table-hover"
+                    >
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>Marca</th>
+                            <th>F. Modificación</th>
+                            <th>F. Creación</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for model in object_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ model.id_model }}</td>
+                            <td>{{ model.name }}</td>
+                            <td>{{ model.updated_at }}</td>
+                            <td>{{ model.created_at }}</td>
+                            <td><span class="badge badge-success">ACTIVO</span></td>
+                            <td>
+                                <a href="{% url 'model_update' model.id_model %}" class="btn btn-primary p-1">
+                                    <img src="{% static 'assets/img/icons/update-icon.svg' %}" alt="" height="20px"
+                                         width="20px">
+                                </a>
+                                <a href="{% url 'model_toggle_status' model.id_model %}"
+                                   class="btn btn-danger p-1 toggle-status-btn">
+                                    <img src="{% static 'assets/img/icons/trash-icon.svg' %}" alt="" height="20px"
+                                         width="20px">
+                                </a>
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
-  </div>
+    </div>
+</div>
 
 

@@ -1,189 +1,190 @@
 <form method="post">
     {% csrf_token %}
     <div class="col-md-12">
-      <div class="card">
-        <div class="card-header">
-          <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2">
-            <div>
-              <div class="card-title">
-                Acción {% if id_plan %}Actualizar{% else %}Crear{% endif %}
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2">
+                    <div>
+                        <div class="card-title">
+                            Acción {% if id_plan %}Actualizar{% else %}Crear{% endif %}
 
-              </div>
-            </div>
-            <div class="ms-md-auto py-2 py-md-0">
-              {% if id_plan %}
-                <a href="{% url 'plan_list' %}" class="btn btn-label-secondary btn-round">Ir a Crear</a>
-                <a href="{% url 'plan_cancellation' id_plan %}" class="btn btn-label-danger btn-round">Cancelar Plan</a>
-              {% endif %}
-              <button type="submit" class="btn btn-primary btn-round">Guardar</button>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="card-body">
-            <div class="row">
-                <div class="col-8">
-                    <div class="row">
+                        </div>
+                    </div>
+                    <div class="ms-md-auto py-2 py-md-0">
                         {% if id_plan %}
-                        <div class="col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label for="disableinput">ID.</label>
-                                <input
-                                        type="text"
-                                        class="form-control"
-                                        id="disableinput"
-                                        placeholder=""
-                                        value="{{ id_plan }}"
-                                        disabled
-                                />
-                            </div>
-                        </div>
+                        <a href="{% url 'plan_list' %}" class="btn btn-label-secondary btn-round">Ir a Crear</a>
+                        <a href="{% url 'plan_cancellation' id_plan %}" class="btn btn-label-danger btn-round">Cancelar
+                            Plan</a>
                         {% endif %}
-                        <div class="col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label>Nombre del Plan Telefónico.</label>
-                                {{ form.name }}
-                                {% if form.name.errors %}
-                                <div class="text-danger">{{ form.name.errors }}</div>
-                                {% endif %}
+                        <button type="submit" class="btn btn-primary btn-round">Guardar</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="row">
+                            {% if id_plan %}
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="disableinput">ID.</label>
+                                    <input
+                                            type="text"
+                                            class="form-control"
+                                            id="disableinput"
+                                            placeholder=""
+                                            value="{{ id_plan }}"
+                                            disabled
+                                    />
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label>Estado de la Cuenta.</label>
-                                {{ form.status_billing }}
-                                {% if form.status_billing.errors %}
-                                <div class="text-danger">{{ form.status_billing.errors }}</div>
-                                {% endif %}
+                            {% endif %}
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label>Nombre del Plan Telefónico.</label>
+                                    {{ form.name }}
+                                    {% if form.name.errors %}
+                                    <div class="text-danger">{{ form.name.errors }}</div>
+                                    {% endif %}
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label>Precio del Plan.</label>
-                                {{ form.price }}
-                                {% if form.price.errors %}
-                                <div class="text-danger">{{ form.price.errors }}</div>
-                                {% endif %}
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label>Estado de la Cuenta.</label>
+                                    {{ form.status_billing }}
+                                    {% if form.status_billing.errors %}
+                                    <div class="text-danger">{{ form.status_billing.errors }}</div>
+                                    {% endif %}
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label>Tipo de Plan.</label><br>
-                                {{ form.type_plan }}
-                                {% if form.type_plan.errors %}
-                                <div class="text-danger">{{ form.type_plan.errors }}</div>
-                                {% endif %}
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label>Precio del Plan.</label>
+                                    {{ form.price }}
+                                    {% if form.price.errors %}
+                                    <div class="text-danger">{{ form.price.errors }}</div>
+                                    {% endif %}
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <label>Fecha de Contratación.</label><br>
-                                {{ form.date_hiring }}
-                                {% if form.date_hiring.errors %}
-                                <div class="text-danger">{{ form.date_hiring.errors }}</div>
-                                {% endif %}
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label>Tipo de Plan.</label><br>
+                                    {{ form.type_plan }}
+                                    {% if form.type_plan.errors %}
+                                    <div class="text-danger">{{ form.type_plan.errors }}</div>
+                                    {% endif %}
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-12 col-lg-12">
-                            <div class="form-group">
-                                <label>Descripción.</label>
-                                {{ form.description }}
-                                {% if form.description.errors %}
-                                <div class="text-danger">{{ form.description.errors }}</div>
-                                {% endif %}
+                            <div class="col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label>Fecha de Contratación.</label><br>
+                                    {{ form.date_hiring }}
+                                    {% if form.date_hiring.errors %}
+                                    <div class="text-danger">{{ form.date_hiring.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label>Descripción.</label>
+                                    {{ form.description }}
+                                    {% if form.description.errors %}
+                                    <div class="text-danger">{{ form.description.errors }}</div>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-4">
-                    <div class="row">
-                        <div class="col-md-12 col-lg-12">
-                            <div class="form-group">
-                                <label>Datos (Gigabytes).</label>
-                                {{ form.gigabytes }}
-                                {% if form.gigabytes.errors %}
-                                <div class="text-danger">{{ form.gigabytes.errors }}</div>
-                                {% endif %}
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label>Datos (Gigabytes).</label>
+                                    {{ form.gigabytes }}
+                                    {% if form.gigabytes.errors %}
+                                    <div class="text-danger">{{ form.gigabytes.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-primary">Datos ilimitados.</label>
+                                    {{ form.unlimited_gigabytes }}
+                                    {% if form.unlimited_gigabytes.errors %}
+                                    <div class="text-danger">{{ form.unlimited_gigabytes.errors }}</div>
+                                    {% endif %}
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label class="text-primary">Datos ilimitados.</label>
-                                {{ form.unlimited_gigabytes }}
-                                {% if form.unlimited_gigabytes.errors %}
-                                <div class="text-danger">{{ form.unlimited_gigabytes.errors }}</div>
-                                {% endif %}
+                            <div class="col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label>Cantidad de Minutos.</label>
+                                    {{ form.minutes }}
+                                    {% if form.minutes.errors %}
+                                    <div class="text-danger">{{ form.minutes.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-primary">Minutos ilimitados.</label>
+                                    {{ form.unlimited_minutes }}
+                                    {% if form.unlimited_minutes.errors %}
+                                    <div class="text-danger">{{ form.unlimited_minutes.errors }}</div>
+                                    {% endif %}
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-12 col-lg-12">
-                            <div class="form-group">
-                                <label>Cantidad de Minutos.</label>
-                                {{ form.minutes }}
-                                {% if form.minutes.errors %}
-                                <div class="text-danger">{{ form.minutes.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="form-group">
-                                <label class="text-primary">Minutos ilimitados.</label>
-                                {{ form.unlimited_minutes }}
-                                {% if form.unlimited_minutes.errors %}
-                                <div class="text-danger">{{ form.unlimited_minutes.errors }}</div>
-                                {% endif %}
-                            </div>
-                        </div>
 
-                        <div class="col-md-12 col-lg-12">
-                            <div class="form-group">
-                                <label>Cantidad de Mensajes.</label>
-                                {{ form.messages }}
-                                {% if form.messages.errors %}
-                                <div class="text-danger">{{ form.messages.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="form-group">
-                                <label class="text-primary">Mensajes ilimitados.</label>
-                                {{ form.unlimited_messages }}
-                                {% if form.unlimited_messages.errors %}
-                                <div class="text-danger">{{ form.unlimited_messages.errors }}</div>
-                                {% endif %}
+                            <div class="col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label>Cantidad de Mensajes.</label>
+                                    {{ form.messages }}
+                                    {% if form.messages.errors %}
+                                    <div class="text-danger">{{ form.messages.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-primary">Mensajes ilimitados.</label>
+                                    {{ form.unlimited_messages }}
+                                    {% if form.unlimited_messages.errors %}
+                                    <div class="text-danger">{{ form.unlimited_messages.errors }}</div>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-      </div>
     </div>
 </form>
 
 <script>
-  // Función para manejar campos ilimitados
-  function setupUnlimitedField(unlimitedCheckboxId, numericInputId) {
-    const unlimitedCheckbox = document.getElementById(unlimitedCheckboxId);
-    const numericInput = document.getElementById(numericInputId);
+    // Función para manejar campos ilimitados
+    function setupUnlimitedField(unlimitedCheckboxId, numericInputId) {
+      const unlimitedCheckbox = document.getElementById(unlimitedCheckboxId);
+      const numericInput = document.getElementById(numericInputId);
 
-    if (!unlimitedCheckbox || !numericInput) return;
+      if (!unlimitedCheckbox || !numericInput) return;
 
-    // Función interna para aplicar estado inicial
-    function toggleInputState() {
-      if (unlimitedCheckbox.checked) {
-        numericInput.value = 0;
-        numericInput.disabled = true;
-      } else {
-        numericInput.disabled = false;
+      // Función interna para aplicar estado inicial
+      function toggleInputState() {
+        if (unlimitedCheckbox.checked) {
+          numericInput.value = 0;
+          numericInput.disabled = true;
+        } else {
+          numericInput.disabled = false;
+        }
       }
+
+      // Aplicar estado inicial al cargar la página
+      toggleInputState();
+
+      // Escuchar cambios
+      unlimitedCheckbox.addEventListener('change', () => {
+        toggleInputState();
+      });
     }
 
-    // Aplicar estado inicial al cargar la página
-    toggleInputState();
-
-    // Escuchar cambios
-    unlimitedCheckbox.addEventListener('change', () => {
-      toggleInputState();
-    });
-  }
-
-  // Configurar cada par
-  setupUnlimitedField("unlimited_gigabytes_plan", "gigabytes_plan");
-  setupUnlimitedField("unlimited_minutes_plan", "minutes_plan");
-  setupUnlimitedField("unlimited_messages_plan", "messages_plan");
+    // Configurar cada par
+    setupUnlimitedField("unlimited_gigabytes_plan", "gigabytes_plan");
+    setupUnlimitedField("unlimited_minutes_plan", "minutes_plan");
+    setupUnlimitedField("unlimited_messages_plan", "messages_plan");
 </script>

@@ -4,20 +4,20 @@
 {% block title %}Subcategorías{% endblock %}
 
 {% block historic %}
-    <a href="#" class="btn btn-label-success btn-round me-2">Reporte</a>
-    <a href="{% url 'subcategory_list' %}" class="btn btn-label-info btn-round me-2">Mantenedor</a>
+<a href="#" class="btn btn-label-success btn-round me-2">Reporte</a>
+<a href="{% url 'subcategory_list' %}" class="btn btn-label-info btn-round me-2">Mantenedor</a>
 {% endblock %}
 
 {% block content %}
 
-    {% include 'components/subcategory_datatable_inactive.html' %}
+{% include 'components/subcategory_datatable_inactive.html' %}
 
 {% endblock %}
 
 {% block section_scripts %}
-  <!-- Datatables -->
-  <script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
-  <script src="{% static 'assets/js/plugin/datatables/datatables_def.js' %}"></script>
-  <script src="{% static 'assets/js/plugin/sweetalert/sweetalert_popup.js' %}"></script>
+<!-- Datatables -->
+<script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
+<script src="{% static 'assets/js/plugin/datatables/datatables_def.js' %}"></script>
+<script src="{% static 'assets/js/plugin/sweetalert/sweetalert_popup.js' %}"></script>
 
 {% endblock %}

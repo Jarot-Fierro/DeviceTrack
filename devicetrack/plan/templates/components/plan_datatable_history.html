@@ -1,92 +1,92 @@
 {% load static %}
 <div class="row">
     <div class="col-md-12">
-       <div class="card">
-          <div class="card-header">
-              <h4 class="card-title">Histórico</h4>
-          </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table
-                id="multi-filter-select"
-                class="display table table-striped table-hover"
-              >
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>ID</th>
-                    <th>Modificación</th>
-                    <th>F. Creación</th>
-                    <th>Usuario Responsable</th>
-                    <th>Operación</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {% for plan in object_list %}
-                  <tr>
-                      <td>{{ forloop.counter }}</td>
-                      <td>{{ plan.id_plan_history }}</td>
-                      <td>
-                          <ul>
-                              <li>ID: {{ plan.id_plan }}</li>
-                              <li>Nombre: {{ plan.data.name }}</li>
-                              <li>Datos:
-                                  {% if plan.data.unlimited_gigabytes == True %}
-                                    ilimitados
-                                  {% else %}
-                                    {{ plan.data.gigabytes }}
-                                  {% endif %}
-                              </li>
-                              <li>Minutos:
-                                  {% if plan.data.unlimited_minutes  == True %}
-                                    ilimitados
-                                  {% else %}
-                                    {{ plan.data.minutes }}
-                                  {% endif %}
-                              </li>
-                              <li>Mensajes:
-                                  {% if plan.data.unlimited_messages == True %}
-                                    ilimitados
-                                  {% else %}
-                                    {{ plan.data.messages }}
-                                  {% endif %}
-                              </li>
-                              <li>Precio: {{ plan.data.price }}</li>
-                              <li>Facturación:
-                                    {% if plan.data.status_billing == 'PAYING' %}
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Histórico</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table
+                            id="multi-filter-select"
+                            class="display table table-striped table-hover"
+                    >
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>Modificación</th>
+                            <th>F. Creación</th>
+                            <th>Usuario Responsable</th>
+                            <th>Operación</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for plan in object_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ plan.id_plan_history }}</td>
+                            <td>
+                                <ul>
+                                    <li>ID: {{ plan.id_plan }}</li>
+                                    <li>Nombre: {{ plan.data.name }}</li>
+                                    <li>Datos:
+                                        {% if plan.data.unlimited_gigabytes == True %}
+                                        ilimitados
+                                        {% else %}
+                                        {{ plan.data.gigabytes }}
+                                        {% endif %}
+                                    </li>
+                                    <li>Minutos:
+                                        {% if plan.data.unlimited_minutes == True %}
+                                        ilimitados
+                                        {% else %}
+                                        {{ plan.data.minutes }}
+                                        {% endif %}
+                                    </li>
+                                    <li>Mensajes:
+                                        {% if plan.data.unlimited_messages == True %}
+                                        ilimitados
+                                        {% else %}
+                                        {{ plan.data.messages }}
+                                        {% endif %}
+                                    </li>
+                                    <li>Precio: {{ plan.data.price }}</li>
+                                    <li>Facturación:
+                                        {% if plan.data.status_billing == 'PAYING' %}
                                         Pagando
-                                    {% elif plan.data.status_billing == 'CANCELED' %}
+                                        {% elif plan.data.status_billing == 'CANCELED' %}
                                         Cancelado
-                                    {% else %}
+                                        {% else %}
                                         Pendiente
-                                    {% endif %}
-                              </li>
-                              <li>F. Contratación: {{ plan.data.date_hiring }}</li>
-                              <li>F. Renuncia: {{ plan.data.date_cancellation }}</li>
-                              <li>Razón de Renuncia: {{ plan.data.reason_cancellation }}</li>
-                              <li>Tipo de Plan: {{ plan.data.type_plan.name }}</li>
-                              <li>Descripción: {{ plan.data.description }}</li>
-                              <li>Estado:
-                                    <strong class="{% if plan.data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
-                                        {% if plan.data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
-                                    </strong>
-                              </li>
-                          </ul>
-                      </td>
-                      <td>{{ plan.timestamp }}</td>
-                      <td>{{ plan.user_login_history }}</td>
-                      <td>
+                                        {% endif %}
+                                    </li>
+                                    <li>F. Contratación: {{ plan.data.date_hiring }}</li>
+                                    <li>F. Renuncia: {{ plan.data.date_cancellation }}</li>
+                                    <li>Razón de Renuncia: {{ plan.data.reason_cancellation }}</li>
+                                    <li>Tipo de Plan: {{ plan.data.type_plan.name }}</li>
+                                    <li>Descripción: {{ plan.data.description }}</li>
+                                    <li>Estado:
+                                        <strong class="{% if plan.data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
+                                            {% if plan.data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
+                                        </strong>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>{{ plan.timestamp }}</td>
+                            <td>{{ plan.user_login_history }}</td>
+                            <td>
                           <span class="badge {% if plan.operation == 'create' %}badge-success{% elif plan.operation == 'update' %}badge-primary{% else %}badge-warning{% endif %}">
                               {% if plan.operation == 'create' %}Creación{% elif plan.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
                           </span>
-                      </td>
-                {% endfor %}
-                </tbody>
-              </table>
+                            </td>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-  </div>
+    </div>
+</div>
 
 
