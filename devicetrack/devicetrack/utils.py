@@ -7,6 +7,7 @@ from brand.models import BrandHistory
 from category.models import CategoryHistory
 from chip.models import ChipHistory
 from company.models import CompanyHistory
+from computer.models import ComputerHistory
 from device_owner.models import DeviceOwnerHistory
 from leadership.models import LeadershipHistory
 from licence_os.models import LicenceOsHistory
@@ -130,3 +131,6 @@ def save_history_standard(request, instance, action):
 
         case 'MicrosoftOffice':
             MicrosoftOfficeHistory.objects.create(**data)
+
+        case 'Computer':
+            ComputerHistory.objects.create(**data)
