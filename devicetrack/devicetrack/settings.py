@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     'chip',
     'official',
     'phone',
+    'licence_os',
+    'microsoft_office',
 ]
 
 MIDDLEWARE = [

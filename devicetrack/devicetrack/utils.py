@@ -9,6 +9,8 @@ from chip.models import ChipHistory
 from company.models import CompanyHistory
 from device_owner.models import DeviceOwnerHistory
 from leadership.models import LeadershipHistory
+from licence_os.models import LicenceOsHistory
+from microsoft_office.models import MicrosoftOfficeHistory
 from model.models import ModelHistory
 from operative_system.models import OperativeSystemHistory
 from phone.models import PhoneHistory
@@ -77,8 +79,6 @@ def save_history_standard(request, instance, action):
         raise Exception(f"No se encontró campo que comience con 'id_' en el modelo {model_name}")
 
     # id_name = f'id_{id_field}'.lower()
-    #
-    print(id_field)
 
     data = {
         id_field: str(getattr(instance, id_field)),
@@ -124,3 +124,9 @@ def save_history_standard(request, instance, action):
 
         case 'Phone':
             PhoneHistory.objects.create(**data)
+
+        case 'LicenceOs':
+            LicenceOsHistory.objects.create(**data)
+
+        case 'MicrosoftOffice':
+            MicrosoftOfficeHistory.objects.create(**data)
