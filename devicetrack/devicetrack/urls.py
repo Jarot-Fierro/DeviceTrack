@@ -34,4 +34,5 @@ urlpatterns = [
     path('plan/', include('plan.urls')),
     path('chip/', include('chip.urls')),
     path('usuarios/', include('official.urls')),
+    path('celulares/', include('phone.urls')),
 ]

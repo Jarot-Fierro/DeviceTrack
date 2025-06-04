@@ -1,0 +1,57 @@
+{% load static %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Histórico</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table
+                            id="multi-filter-select"
+                            class="display table table-striped table-hover"
+                    >
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>Modificación</th>
+                            <th>F. Creación</th>
+                            <th>Usuario Responsable</th>
+                            <th>Operación</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for phone in object_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ phone.id_phone_history }}</td>
+                            <td>
+                                <ul>
+                                    <li>ID: {{ phone.id_phone }}</li>
+                                    <li>Nombre: {{ phone.data.imei }}</li>
+                                    <li>Estado:
+                                        <strong class="{% if phone.data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
+                                            {% if phone.data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif %}
+                                        </strong>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>{{ phone.timestamp }}</td>
+                            <td>{{ phone.user_login }}</td>
+                            <td>
+                          <span class="badge {% if phone.operation == 'create' %}badge-success{% elif phone.operation == 'update' %}badge-primary{% else %}badge-warning{% endif %}">
+                              {% if phone.operation == 'create' %}Creación{% elif phone.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                          </span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
