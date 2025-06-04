@@ -1,0 +1,27 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+
+{% block title %}Licencias de Sistemas Operativos{% endblock %}
+
+{% block historic %}
+<a href="#" class="btn btn-label-success btn-round me-2">Reporte</a>
+<a href="{% url 'licence_os_deleted_records' %}" class="btn btn-label-danger btn-round me-2">Registros Eliminados</a>
+<a href="{% url 'licence_os_list' %}" class="btn btn-label-info btn-round me-2">Mantenedor</a>
+{% endblock %}
+
+{% block content %}
+
+<!-- DATA TABLE ACTIVE -->
+{% include 'components/licence_os_datatable_history.html' %}
+<!-- END DATA TABLE ACTIVE-->
+
+
+{% endblock %}
+
+
+{% block section_scripts %}
+<!-- Datatables -->
+<script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
+<script src="{% static 'assets/js/plugin/datatables/datatables_def.js' %}"></script>
+
+{% endblock %}

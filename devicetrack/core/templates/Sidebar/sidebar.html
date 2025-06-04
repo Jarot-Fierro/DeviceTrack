@@ -103,6 +103,33 @@
                     </div>
                 </li>
                 <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#licences">
+                        <img
+                                class="me-2"
+                                src="{% static 'assets/img/icons/shield-icon.svg' %}"
+                                alt="Icono de Carpeta"
+                                width="20px"
+                                height="20px"
+                        />
+                        <p>Licencias</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="licences">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="{% url 'licence_os_list' %}">
+                                    <span class="sub-item">Licencias Os</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'microsoft_office_list' %}">
+                                    <span class="sub-item">Office</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#device">
                         <img
                                 class="me-2"

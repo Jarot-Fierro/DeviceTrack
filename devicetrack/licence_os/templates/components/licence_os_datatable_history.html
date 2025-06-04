@@ -1,0 +1,59 @@
+{% load static %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Histórico</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table
+                            id="multi-filter-select"
+                            class="display table table-striped table-hover"
+                    >
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>Modificación</th>
+                            <th>F. Creación</th>
+                            <th>Usuario Responsable</th>
+                            <th>Operación</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for licence_os in object_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ licence_os.id_licence_os_history }}</td>
+                            <td>
+                                <ul>
+                                    <li>ID: {{ licence_os.id_licence_os }}</li>
+                                    <li>Nombre: {{ licence_os.data.name }}</li>
+                                    <li>Descripción: {{ licence_os.data.description }}</li>
+                                    <li>Estado:
+                                        <strong class="{% if licence_os.data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
+                                            {% if licence_os.data.status == 'ACTIVE' %}Activo{% else %}Inactivo
+                                            {% endif %}
+                                        </strong>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>{{ licence_os.timestamp }}</td>
+                            <td>{{ licence_os.user_login }}</td>
+                            <td>
+                          <span class="badge {% if licence_os.operation == 'create' %}badge-success{% elif licence_os.operation == 'update' %}badge-primary{% else %}badge-warning{% endif %}">
+                              {% if licence_os.operation == 'create' %}Creación{% elif licence_os.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                          </span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import LicenceOs, LicenceOsHistory
+
+admin.site.register(LicenceOs)
+admin.site.register(LicenceOsHistory)
