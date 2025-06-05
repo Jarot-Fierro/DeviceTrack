@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Inks, InksHistory
+
+admin.site.register(Inks)
+admin.site.register(InksHistory)

@@ -61,6 +61,8 @@ INSTALLED_APPS = [
     'licence_os',
     'microsoft_office',
     'computer',
+    'inks',
+    'printer',
 ]
 
 MIDDLEWARE = [
