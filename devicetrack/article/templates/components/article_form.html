@@ -1,0 +1,103 @@
+<form method="post">
+    {% csrf_token %}
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2">
+                    <div>
+                        <div class="card-title">
+                            Acción {% if id_article %}Actualizar{% else %}Crear{% endif %}
+
+                        </div>
+                    </div>
+                    <div class="ms-md-auto py-2 py-md-0">
+                        {% if id_article %}
+                        <a href="{% url 'article_list' %}" class="btn btn-secondary btn-round">Ir a Crear</a>
+                        {% endif %}
+                        <button type="submit" class="btn btn-primary btn-round">Guardar</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="row">
+                            {% if id_article %}
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label for="disableinput">ID.</label>
+                                    <input
+                                            type="text"
+                                            class="form-control"
+                                            id="disableinput"
+                                            placeholder=""
+                                            value="{{ id_article }}"
+                                            disabled
+                                    />
+                                </div>
+                            </div>
+                            {% endif %}
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label>Nombre del Articulo.</label>
+                                    {{ form.name }}
+                                    {% if form.name.errors %}
+                                    <div class="text-danger">{{ form.name.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label>Marca.</label>
+                                    {{ form.brand }}
+                                    {% if form.brand.errors %}
+                                    <div class="text-danger">{{ form.brand.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label>Modelo.</label>
+                                    {{ form.model }}
+                                    {% if form.model.errors %}
+                                    <div class="text-danger">{{ form.model.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% if not id_article %}
+                            <div class="col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label>¿Este artículo es por <strong class="text-primary">Códigos</strong>?.</label>
+                                    <br>
+                                    {{ form.is_serialized }}
+                                    {% if form.is_serialized.errors %}
+                                    <div class="text-danger">{{ form.is_serialized.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label>Descripción.</label>
+                                    {{ form.description }}
+                                    {% if form.description.errors %}
+                                    <div class="text-danger">{{ form.description.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+

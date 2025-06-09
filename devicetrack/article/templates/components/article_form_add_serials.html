@@ -1,0 +1,78 @@
+<form method="post">
+    {% csrf_token %}
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2">
+                    <div>
+                        <div class="card-title">
+                            {% if form.instance.pk %}
+                            Editando código de serie de:
+                            {% else %}
+                            Agregar códigos de serie de:
+                            {% endif %}
+                            {{ article.name }}
+                        </div>
+                    </div>
+                    <div class="ms-md-auto py-2 py-md-0">
+                        <button type="submit" class="btn btn-primary btn-round">Guardar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {% if article.id_article %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="form-group">
+                            <label for="disableinput">ID (Articulo/Equipo).</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    id="disableinput"
+                                    placeholder=""
+                                    value="{{ article.id_article }}"
+                                    disabled
+                            />
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if form.instance.pk %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="form-group">
+                            <label for="disableinput2">ID interno (Código de Serie)</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    id="disableinput2"
+                                    value="{{ form.instance.pk }}"
+                                    disabled
+                            />
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="form-group">
+                            <label>Código de Serie.</label>
+                            {{ form.serial_code }}
+                            {% if form.serial_code.errors %}
+                            <div class="text-danger">{{ form.serial_code.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="form-group">
+                            <label>Estado del Equipo.</label>
+                            {{ form.serial_status }}
+                            {% if form.serial_status.errors %}
+                            <div class="text-danger">{{ form.serial_status.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+

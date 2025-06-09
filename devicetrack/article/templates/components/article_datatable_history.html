@@ -1,0 +1,75 @@
+{% load static %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Histórico</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table
+                            id="multi-filter-select"
+                            class="display table table-striped table-hover"
+                    >
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>Modificación</th>
+                            <th>F. Creación</th>
+                            <th>Usuario Responsable</th>
+                            <th>Operación</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for article in object_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ article.id_article_history }}</td>
+                            <td>
+                                <ul>
+                                    <li>ID: {{ article.article.id_article }}</li>
+                                    <li>Nombre: {{ article.history.data.name }}</li>
+                                    <li>Marca: {{ article.history.data.brand }}</li>
+                                    <li>Modelo: {{ article.history.data.model }} {{article.stock}}</li>
+                                    <li>Tipo de Cantidad:
+                                        {% if article.history.data.is_serialized %}
+                                        Por serie
+                                        {% else %}
+                                        Por cantidad
+                                        {% endif %}
+                                    </li>
+                                    <li>Stock:
+                                        {% if article.history.data.is_serialized %}
+                                        {{ article.total_serials }}
+                                        {% else %}
+                                        {{ article.stock|default:"0" }}
+                                        {% endif %}
+                                    </li>
+                                    <li>Estado:
+                                        <strong class="{% if article.history.data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
+                                            {% if article.history.data.status == 'ACTIVE' %}Activo{% else %}
+                                            Inactivo
+                                            {% endif %}
+                                        </strong>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>{{ article.history.timestamp }}</td>
+                            <td>{{ article.history.user_login }}</td>
+                            <td>
+                          <span class="badge {% if article.history.operation == 'create' %}badge-success{% elif article.history.operation == 'update' %}badge-primary{% else %}badge-warning{% endif %}">
+                              {% if article.history.operation == 'create' %}Creación{% elif article.history.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                          </span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

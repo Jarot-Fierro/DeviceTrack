@@ -3,6 +3,7 @@ from uuid import UUID
 
 from django.forms.models import model_to_dict
 
+from article.models import ArticleHistory
 from brand.models import BrandHistory
 from category.models import CategoryHistory
 from chip.models import ChipHistory
@@ -142,3 +143,6 @@ def save_history_standard(request, instance, action):
 
         case 'Printer':
             PrinterHistory.objects.create(**data)
+
+        case 'Article':
+            ArticleHistory.objects.create(**data)

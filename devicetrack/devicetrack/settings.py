@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'computer',
     'inks',
     'printer',
+    'article',
 ]
 
 MIDDLEWARE = [

@@ -37,7 +37,8 @@ urlpatterns = [
     path('celulares/', include('phone.urls')),
     path('licencias-os/', include('licence_os.urls')),
     path('microsoft-office/', include('microsoft_office.urls')),
-    path('computadores', include('computer.urls')),
-    path('tintas-toner', include('inks.urls')),
-    path('impresoras', include('printer.urls')),
+    path('computadores/', include('computer.urls')),
+    path('tintas-toner/', include('inks.urls')),
+    path('impresoras/', include('printer.urls')),
+    path('otros-articulos/', include('article.urls')),
 ]

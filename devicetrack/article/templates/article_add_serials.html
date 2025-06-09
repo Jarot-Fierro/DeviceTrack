@@ -1,0 +1,29 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+
+{% block title %}Otros Equipos o Artículos{% endblock %}
+
+{% block historic %}
+
+<a href="#" class="btn btn-label-success btn-round me-2">Reporte</a>
+<a href="{% url 'article_deleted_records' %}" class="btn btn-label-danger btn-round me-2">Registros Eliminados</a>
+<a href="{% url 'article_list' %}" class="btn btn-label-info btn-round me-2">Mantenedor</a>
+
+{% endblock %}
+
+{% block content %}
+
+{% include 'components/article_form_add_serials.html' %}
+
+{% include 'components/article_datatable_serials.html' %}
+
+{% endblock %}
+
+
+{% block section_scripts %}
+<!-- Datatables -->
+<script src="{% static 'assets/js/plugin/datatables/datatables.min.js' %}"></script>
+<script src="{% static 'assets/js/plugin/datatables/datatables_def.js' %}"></script>
+<script src="{% static 'assets/js/plugin/sweetalert/sweetalert_popup.js' %}"></script>
+
+{% endblock %}
