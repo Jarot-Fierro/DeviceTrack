@@ -8,8 +8,24 @@ from django.views.generic.edit import FormMixin, ProcessFormView, FormView, Upda
 
 from devicetrack.utils import save_history_standard
 from .forms import FormArticle, FormStock, FormSerialNumber, FormArticleUpdate
-from .models import Article, ArticleHistory, SerialNumber
+from .models import Article, ArticleHistory, SerialNumber, SerialNumberHistory
 from .models import ArticleStock
+
+
+def save_history_serials(request, serial, operation):
+    SerialNumberHistory.objects.create(
+        serial_number=serial,
+        operation=operation,
+        data={
+            'serial_number': str(serial.pk),  # 👈 aquí está la clave que falta
+            'serial_code': serial.serial_code,
+            'article_id': str(serial.article.pk),
+            'article_name': serial.article.name,
+            'status': getattr(serial, 'serial_status', 'N/A')
+        },
+        user_login=request.user,
+        user_login_history=str(request.user.username)
+    )
 
 
 class ArticleCreateView(TemplateView, FormMixin, ProcessFormView):
@@ -95,6 +111,7 @@ class ArticleAddSerialsView(TemplateView):
             serial = form.save(commit=False)
             serial.article = self.article
             serial.save()
+            save_history_serials(request, serial, 'create')
             messages.success(request, 'Código agregado correctamente.')
             return redirect('article_add_serials', pk=self.article.pk)
 
@@ -168,7 +185,9 @@ class SerialNumberUpdateView(UpdateView):
     model = SerialNumber
     form_class = FormSerialNumber
     template_name = 'article_add_serials.html'
-    success_url = reverse_lazy('article_add_stock')
+
+    def get_success_url(self):
+        return reverse_lazy('article_add_stock', kwargs={'pk': self.object.article.pk})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -177,8 +196,10 @@ class SerialNumberUpdateView(UpdateView):
         return context
 
     def form_valid(self, form):
+        response = super().form_valid(form)
+        save_history_serials(self.request, self.object, 'update')
         messages.success(self.request, "Código de serie actualizado correctamente.")
-        return super().form_valid(form)
+        return response
 
     def form_invalid(self, form):
         messages.error(self.request, "Hubo un error al actualizar el código de serie.")
@@ -221,3 +242,11 @@ class ArticleHistoryView(ListView):
 
         context['object_list'] = enriched_entries
         return context
+
+
+class SerialNumberHistoryView(ListView):
+    model = SerialNumberHistory
+    template_name = 'serial_number_list_history.html'
+
+    def get_queryset(self):
+        return SerialNumberHistory.objects.all().order_by('-updated_at')

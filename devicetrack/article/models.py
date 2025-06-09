@@ -77,3 +77,16 @@ class ArticleHistory(StandardModel):
 
     def __str__(self):
         return self.id_article
+
+
+class SerialNumberHistory(StandardModel):
+    id_serial_number_history = models.AutoField(primary_key=True, unique=True, editable=False)
+    serial_number = models.ForeignKey('SerialNumber', on_delete=models.CASCADE)
+    operation = models.CharField(max_length=100)
+    data = models.JSONField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    user_login_history = models.CharField(max_length=100, blank=True)
+    user_login = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.serial_number)

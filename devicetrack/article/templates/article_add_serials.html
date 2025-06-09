@@ -4,7 +4,7 @@
 {% block title %}Otros Equipos o Artículos{% endblock %}
 
 {% block historic %}
-
+<a href="{% url 'serial_number_history' %}" class="btn btn-label-warning btn-round me-2">Histórico de Series</a>
 <a href="#" class="btn btn-label-success btn-round me-2">Reporte</a>
 <a href="{% url 'article_deleted_records' %}" class="btn btn-label-danger btn-round me-2">Registros Eliminados</a>
 <a href="{% url 'article_list' %}" class="btn btn-label-info btn-round me-2">Mantenedor</a>
