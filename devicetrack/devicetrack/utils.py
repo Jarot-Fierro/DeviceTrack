@@ -17,6 +17,7 @@ from leadership.models import LeadershipHistory
 from licence_os.models import LicenceOsHistory
 from microsoft_office.models import MicrosoftOfficeHistory
 from model.models import ModelHistory
+from official.models import OfficialHistory
 from operative_system.models import OperativeSystemHistory
 from phone.models import PhoneHistory
 from plan.models import PlanHistory
@@ -154,3 +155,6 @@ def save_history_standard(request, instance, action):
 
         case 'Departament':
             DepartamentHistory.objects.create(**data)
+
+        case 'Official':
+            OfficialHistory.objects.create(**data)

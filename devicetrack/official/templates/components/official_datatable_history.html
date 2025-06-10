@@ -30,15 +30,16 @@
                                 <ul>
                                     <li>ID: {{ official.id_official }}</li>
                                     <li>RUT: {{ official.data.rut }}</li>
-                                    <li>RUT: {{ official.data.first_names }}</li>
-                                    <li>RUT: {{ official.data.pather_surname }}</li>
-                                    <li>RUT: {{ official.data.mather_surname }}</li>
+                                    <li>Nombre: {{ official.data.first_names }}
+                                        {{ official.data.pather_surname }}
+                                        {{ official.data.mather_surname }}
+                                    </li>
                                     <li>Correo: {{ official.data.email }}</li>
-                                    <li>Cargo: {{ official.data.boss_position }}</li>
+                                    <li>Departamento: {{ official.data.departament }}</li>
                                     <li>Estado:
                                         <strong class="{% if official.data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
-                                            {% if official.data.status == 'ACTIVE' %}Activo{% else %}Inactivo{% endif
-                                            %}
+                                            {% if official.data.status == 'ACTIVE' %}Activo{% else %}Inactivo
+                                            {% endif %}
                                         </strong>
                                     </li>
                                 </ul>

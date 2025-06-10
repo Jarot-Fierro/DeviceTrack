@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
+from departament.models import Departament
 from devicetrack.utils import rut_validate
 from .models import Official
 
@@ -65,6 +66,17 @@ class FormOfficial(forms.ModelForm):
                 'max-lenght': 150
             }),
         required=True
+    )
+    departament = forms.ModelChoiceField(
+        queryset=Departament.objects.all().filter(status='ACTIVE'),
+        empty_label="Seleccione un departamento",
+        widget=forms.Select(
+            attrs={
+                'id': 'departament_official',
+                'class': 'form-control',
+            }
+        ),
+        required=False
     )
 
     def clean_first_names(self):
@@ -132,4 +144,4 @@ class FormOfficial(forms.ModelForm):
 
     class Meta:
         model = Official
-        fields = ['first_names', 'pather_surname', 'mather_surname', 'rut', 'email', ]
+        fields = ['first_names', 'pather_surname', 'mather_surname', 'rut', 'email', 'departament']

@@ -83,6 +83,15 @@
                             {% endif %}
                         </div>
                     </div>
+                    <div class="col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Departamento.</label>
+                            {{ form.departament }}
+                            {% if form.departament.errors %}
+                            <div class="text-danger">{{ form.departament.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

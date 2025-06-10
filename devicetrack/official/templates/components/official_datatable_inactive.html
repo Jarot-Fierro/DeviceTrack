@@ -18,9 +18,11 @@
                             <th>Nombre</th>
                             <th>Rut</th>
                             <th>Correo</th>
-                            <th>Cargo</th>
+                            <th>Departamento</th>
+                            <th>Establecimiento</th>
                             <th>F. Modificación</th>
                             <th>F. Creación</th>
+                            <th>Estado</th>
                             <th>Acción</th>
                         </tr>
                         </thead>
@@ -29,11 +31,12 @@
                         <tr>
                             <td>{{ forloop.counter }}</td>
                             <td>{{ official.id_official }}</td>
+                            <td>{{ official.first_names }} {{ official.pather_surname }} {{ official.mather_surname }}
+                            </td>
                             <td>{{ official.rut }}</td>
-                            <td>{{ official.first_names }}</td>
-                            <td>{{ official.pather_surname }}</td>
-                            <td>{{ official.mather_surname }}</td>
                             <td>{{ official.email }}</td>
+                            <td>{{ official.departament.name }}</td>
+                            <td>{{ official.departament.establishment.name }}</td>
                             <td>{{ official.updated_at }}</td>
                             <td>{{ official.created_at }}</td>
                             <td><span class="badge badge-danger">INACTIVO</span></td>

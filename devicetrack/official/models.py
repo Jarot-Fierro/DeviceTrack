@@ -3,6 +3,7 @@ import uuid
 from django.contrib.auth.models import User
 from django.db import models
 
+from departament.models import Departament
 from devicetrack.abstract import StandardModel
 
 
@@ -21,7 +22,7 @@ class Official(StandardModel):
     status = models.CharField(max_length=150, choices=STATUS, default='ACTIVE')
 
     # Foreignkey
-    #     departament = models.ForeignKey(Departament, on_delete=models.CASCADE, null=True, blank=True)
+    departament = models.ForeignKey(Departament, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return f"{self.first_names} {self.pather_surname}"
