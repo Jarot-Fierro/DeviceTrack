@@ -41,4 +41,5 @@ urlpatterns = [
     path('tintas-toner/', include('inks.urls')),
     path('impresoras/', include('printer.urls')),
     path('otros-articulos/', include('article.urls')),
+    path('establecimientos/', include('establishment.urls')),
 ]

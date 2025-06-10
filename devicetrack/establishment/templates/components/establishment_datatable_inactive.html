@@ -1,0 +1,59 @@
+{% load static %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Registros Deshabilitados</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table
+                            id="multi-filter-select-2"
+                            class="display table table-striped table-hover"
+                    >
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Ciudad</th>
+                            <th>Descripción</th>
+                            <th>F. Modificación</th>
+                            <th>F. Creación</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for establishment in object_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ establishment.id_establishment }}</td>
+                            <td>{{ establishment.name }}</td>
+                            <td>{{ establishment.city }}</td>
+                            <td>{{ establishment.description }}</td>
+                            <td>{{ establishment.updated_at }}</td>
+                            <td>{{ establishment.created_at }}</td>
+                            <td><span class="badge badge-danger">INACTIVO</span></td>
+                            <td>
+                                <a href="{% url 'establishment_update' establishment.id_establishment %}"
+                                   class="btn btn-primary p-1">
+                                    <img src="{% static 'assets/img/icons/update-icon.svg' %}" alt="" height="20px"
+                                         width="20px">
+                                </a>
+                                <a href="{% url 'establishment_toggle_status' establishment.id_establishment %}"
+                                   class="btn btn-success p-1 toggle-status-btn">
+                                    <img src="{% static 'assets/img/icons/trash-can-icon.svg' %}" alt="" height="20px"
+                                         width="20px">
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

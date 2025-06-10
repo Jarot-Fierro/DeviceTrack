@@ -1,0 +1,60 @@
+{% load static %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Histórico</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table
+                            id="multi-filter-select"
+                            class="display table table-striped table-hover"
+                    >
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>Modificación</th>
+                            <th>F. Creación</th>
+                            <th>Usuario Responsable</th>
+                            <th>Operación</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for establishment in object_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ establishment.id_establishment_history }}</td>
+                            <td>
+                                <ul>
+                                    <li>ID: {{ establishment.id_establishment }}</li>
+                                    <li>Nombre: {{ establishment.data.name }}</li>
+                                    <li>Descripción: {{ establishment.data.city }}</li>
+                                    <li>Descripción: {{ establishment.data.description }}</li>
+                                    <li>Estado:
+                                        <strong class="{% if establishment.data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
+                                            {% if establishment.data.status == 'ACTIVE' %}Activo{% else %}Inactivo
+                                            {% endif %}
+                                        </strong>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>{{ establishment.timestamp }}</td>
+                            <td>{{ establishment.user_login }}</td>
+                            <td>
+                          <span class="badge {% if establishment.operation == 'create' %}badge-success{% elif establishment.operation == 'update' %}badge-primary{% else %}badge-warning{% endif %}">
+                              {% if establishment.operation == 'create' %}Creación{% elif establishment.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                          </span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

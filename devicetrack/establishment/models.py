@@ -14,7 +14,6 @@ class Establishment(StandardModel):
 
     id_establishment = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
-    address = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     description = models.TextField()
     status = models.CharField(max_length=150, choices=STATUS, default='ACTIVE')

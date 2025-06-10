@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'inks',
     'printer',
     'article',
+    'establishment',
 ]
 
 MIDDLEWARE = [

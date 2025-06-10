@@ -10,6 +10,7 @@ from chip.models import ChipHistory
 from company.models import CompanyHistory
 from computer.models import ComputerHistory
 from device_owner.models import DeviceOwnerHistory
+from establishment.models import EstablishmentHistory
 from inks.models import InksHistory
 from leadership.models import LeadershipHistory
 from licence_os.models import LicenceOsHistory
@@ -146,3 +147,6 @@ def save_history_standard(request, instance, action):
 
         case 'Article':
             ArticleHistory.objects.create(**data)
+
+        case 'Establishment':
+            EstablishmentHistory.objects.create(**data)
