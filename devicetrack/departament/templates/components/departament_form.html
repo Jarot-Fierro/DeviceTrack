@@ -6,13 +6,13 @@
                 <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2">
                     <div>
                         <div class="card-title">
-                            Acción {% if id_establishment %}Actualizar{% else %}Crear{% endif %}
+                            Acción {% if id_departament %}Actualizar{% else %}Crear{% endif %}
 
                         </div>
                     </div>
                     <div class="ms-md-auto py-2 py-md-0">
-                        {% if id_establishment %}
-                        <a href="{% url 'establishment_list' %}" class="btn btn-secondary btn-round">Ir a Crear</a>
+                        {% if id_departament %}
+                        <a href="{% url 'departament_list' %}" class="btn btn-secondary btn-round">Ir a Crear</a>
                         {% endif %}
                         <button type="submit" class="btn btn-primary btn-round">Guardar</button>
                     </div>
@@ -22,7 +22,7 @@
 
             <div class="card-body">
                 <div class="row">
-                    {% if id_establishment %}
+                    {% if id_departament %}
                     <div class="col-md-4 col-lg-4">
                         <div class="form-group">
                             <label for="disableinput">ID.</label>
@@ -31,7 +31,7 @@
                                     class="form-control"
                                     id="disableinput"
                                     placeholder=""
-                                    value="{{ id_establishment }}"
+                                    value="{{ id_departament }}"
                                     disabled
                             />
                         </div>
@@ -39,7 +39,7 @@
                     {% endif %}
                     <div class="col-md-4 col-lg-4">
                         <div class="form-group">
-                            <label>Nombre del Establecimiento</label>
+                            <label>Nombre del Departamento</label>
                             {{ form.name }}
                             {% if form.name.errors %}
                             <div class="text-danger">{{ form.name.errors }}</div>
@@ -48,10 +48,19 @@
                     </div>
                     <div class="col-md-4 col-lg-4">
                         <div class="form-group">
-                            <label>Ciudad</label>
-                            {{ form.city }}
-                            {% if form.city.errors %}
-                            <div class="text-danger">{{ form.city.errors }}</div>
+                            <label>Dirección</label>
+                            {{ form.address }}
+                            {% if form.address.errors %}
+                            <div class="text-danger">{{ form.address.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Establecimiento</label>
+                            {{ form.establishment }}
+                            {% if form.establishment.errors %}
+                            <div class="text-danger">{{ form.establishment.errors }}</div>
                             {% endif %}
                         </div>
                     </div>

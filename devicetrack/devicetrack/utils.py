@@ -9,6 +9,7 @@ from category.models import CategoryHistory
 from chip.models import ChipHistory
 from company.models import CompanyHistory
 from computer.models import ComputerHistory
+from departament.models import DepartamentHistory
 from device_owner.models import DeviceOwnerHistory
 from establishment.models import EstablishmentHistory
 from inks.models import InksHistory
@@ -150,3 +151,6 @@ def save_history_standard(request, instance, action):
 
         case 'Establishment':
             EstablishmentHistory.objects.create(**data)
+
+        case 'Departament':
+            DepartamentHistory.objects.create(**data)

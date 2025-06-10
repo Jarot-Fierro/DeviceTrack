@@ -1,0 +1,62 @@
+{% load static %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Registros Habilitados</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table
+                            id="multi-filter-select"
+                            class="display table table-striped table-hover"
+                    >
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Dirección</th>
+                            <th>Establecimiento</th>
+                            <th>Descripción</th>
+                            <th>F. Modificación</th>
+                            <th>F. Creación</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for departament in object_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ departament.id_departament }}</td>
+                            <td>{{ departament.name }}</td>
+                            <td>{{ departament.address }}</td>
+                            <td>{{ departament.establishment.name }}</td>
+                            <td>{{ departament.description }}</td>
+                            <td>{{ departament.updated_at }}</td>
+                            <td>{{ departament.created_at }}</td>
+                            <td><span class="badge badge-success">ACTIVO</span></td>
+                            <td>
+                                <a href="{% url 'departament_update' departament.id_departament %}"
+                                   class="btn btn-primary p-1">
+                                    <img src="{% static 'assets/img/icons/update-icon.svg' %}" alt="" height="20px"
+                                         width="20px">
+                                </a>
+                                <a href="{% url 'departament_toggle_status' departament.id_departament %}"
+                                   class="btn btn-danger p-1 toggle-status-btn">
+                                    <img src="{% static 'assets/img/icons/trash-icon.svg' %}" alt="" height="20px"
+                                         width="20px">
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

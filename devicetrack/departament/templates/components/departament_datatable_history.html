@@ -22,29 +22,30 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for establishment in object_list %}
+                        {% for departament in object_list %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td>{{ establishment.id_establishment_history }}</td>
+                            <td>{{ departament.id_departament_history }}</td>
                             <td>
                                 <ul>
-                                    <li>ID: {{ establishment.id_establishment }}</li>
-                                    <li>Nombre: {{ establishment.data.name }}</li>
-                                    <li>Ciudad: {{ establishment.data.city }}</li>
-                                    <li>Descripción: {{ establishment.data.description }}</li>
+                                    <li>ID: {{ departament.id_departament }}</li>
+                                    <li>Nombre: {{ departament.data.name }}</li>
+                                    <li>Dirección: {{ departament.data.address }}</li>
+                                    <li>Establecimiento: {{ departament.data.establishment }}</li>
+                                    <li>Descripción: {{ departament.data.description }}</li>
                                     <li>Estado:
-                                        <strong class="{% if establishment.data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
-                                            {% if establishment.data.status == 'ACTIVE' %}Activo{% else %}Inactivo
+                                        <strong class="{% if departament.data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
+                                            {% if departament.data.status == 'ACTIVE' %}Activo{% else %}Inactivo
                                             {% endif %}
                                         </strong>
                                     </li>
                                 </ul>
                             </td>
-                            <td>{{ establishment.timestamp }}</td>
-                            <td>{{ establishment.user_login }}</td>
+                            <td>{{ departament.timestamp }}</td>
+                            <td>{{ departament.user_login }}</td>
                             <td>
-                          <span class="badge {% if establishment.operation == 'create' %}badge-success{% elif establishment.operation == 'update' %}badge-primary{% else %}badge-warning{% endif %}">
-                              {% if establishment.operation == 'create' %}Creación{% elif establishment.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                          <span class="badge {% if departament.operation == 'create' %}badge-success{% elif departament.operation == 'update' %}badge-primary{% else %}badge-warning{% endif %}">
+                              {% if departament.operation == 'create' %}Creación{% elif departament.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
                           </span>
                             </td>
                         </tr>

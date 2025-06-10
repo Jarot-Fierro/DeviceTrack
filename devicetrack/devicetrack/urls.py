@@ -42,4 +42,5 @@ urlpatterns = [
     path('impresoras/', include('printer.urls')),
     path('otros-articulos/', include('article.urls')),
     path('establecimientos/', include('establishment.urls')),
+    path('departamentos/', include('departament.urls')),
 ]

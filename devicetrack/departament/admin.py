@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Departament, DepartamentHistory
+
+admin.site.register(Departament)
+admin.site.register(DepartamentHistory)
