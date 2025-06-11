@@ -1,41 +1,54 @@
 {% if messages %}
-{% for message in messages %}
 <script>
-    window.addEventListener("DOMContentLoaded", function () {
-      var tipo = "{{ message.tags }}";
-      var titulo = "";
-      var icono = "success";
+    document.addEventListener("DOMContentLoaded", function () {
+        {% for message in messages %}
+        {% if 'auth_success' in message.tags %}
+        $.notify({
+            message: "{{ message|escapejs }}"
+        }, {
+            type: "success",
+            delay: 5000,
+            placement: {
+                from: "top",
+                align: "right"
+            }
+        });
+        {% else %}
+        var tipo = "{{ message.tags }}";
+        var titulo = "";
+        var icono = "success";
 
-      switch (tipo) {
-        case "error":
-          titulo = "Error";
-          icono = "error";
-          break;
-        case "warning":
-          titulo = "Advertencia";
-          icono = "warning";
-          break;
-        case "info":
-          titulo = "Información";
-          icono = "info";
-          break;
-        default:
-          titulo = "Éxito";
-          icono = "success";
-      }
-
-      swal({
-        title: titulo,
-        text: "{{ message }}",
-        icon: icono,
-        buttons: {
-          confirm: {
-            className: 'btn btn-' + icono,
-            text: "Aceptar"
-          }
+        switch (tipo) {
+            case "error":
+                titulo = "Error";
+                icono = "error";
+                break;
+            case "warning":
+                titulo = "Advertencia";
+                icono = "warning";
+                break;
+            case "info":
+                titulo = "Información";
+                icono = "info";
+                break;
+            default:
+                titulo = "Éxito";
+                icono = "success";
         }
-      });
+
+        swal({
+            title: titulo,
+            text: "{{ message|escapejs }}",
+            icon: icono,
+            buttons: {
+                confirm: {
+                    className: 'btn btn-' + icono,
+                    text: "Aceptar"
+                }
+            }
+        });
+        {% endif %}
+        {% endfor %}
     });
 </script>
-{% endfor %}
 {% endif %}

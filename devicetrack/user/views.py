@@ -1,5 +1,6 @@
 from django.contrib.auth import login
 from django.contrib.auth.views import LogoutView
+from django.contrib.messages import add_message, SUCCESS
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
@@ -27,7 +28,9 @@ class LoginViewCustom(FormView):
         """Autenticar usuario y manejar sesión"""
         user = form.get_user()
         login(self.request, user)
-        self.request.session.set_expiry(0)  # Cierra sesión al cerrar navegador
+        self.request.session.set_expiry(0)
+
+        add_message(self.request, SUCCESS, 'Inicio de sesión exitoso.', extra_tags='auth_success')
         return super().form_valid(form)
 
     def redirect_to_success_url(self):
@@ -40,5 +43,6 @@ class LogoutViewCustom(LogoutView):
 
     def dispatch(self, request, *args, **kwargs):
         response = super().dispatch(request, *args, **kwargs)
-        request.session.flush()  # Elimina todos los datos de sesión
+        request.session.flush()
+        add_message(self.request, SUCCESS, 'Se cerró la sesión correctamente.', extra_tags='auth_success')
         return response
