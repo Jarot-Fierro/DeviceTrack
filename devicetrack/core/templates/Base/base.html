@@ -168,6 +168,11 @@
       fillColor: "rgba(255, 165, 52, .14)",
     });
 </script>
+
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
 {% block section_scripts %}{% endblock %}
 
 
