@@ -34,8 +34,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = True
 
 # Seguridad básica
-SESSION_COOKIE_SECURE = True  # solo si usas HTTPS
-CSRF_COOKIE_SECURE = True  # solo si usas HTTPS
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'

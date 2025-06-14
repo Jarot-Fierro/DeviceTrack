@@ -1,4 +1,3 @@
-
 Para ejecutar el proyecto sigue los siguientes pasos
 
 1- Crea tu ambiente virtual (venv) e instala las siguiente librerias con pip.
@@ -6,6 +5,7 @@ Para ejecutar el proyecto sigue los siguientes pasos
     > python.exe -m pip install --upgrade pip,
     > pip install python-dotenv,
     > pip install psycopg2,
+    > pip install Pillow,
 
 2- Crea un archivo .env en la raíz del proyecto para guardar la SECRET KEY de Django.
 

@@ -1,0 +1,13 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% include 'components/form.html' %}
+
+{% endblock %}
+
+{% block section_scripts %}
+<script src="{% static 'assets/js/plugin/sweetalert/sweetalert_popup.js' %}"></script>
+
+{% endblock %}
