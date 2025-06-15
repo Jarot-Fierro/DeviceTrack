@@ -1,0 +1,59 @@
+{% load static %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Histórico</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table
+                            id="multi-filter-select"
+                            class="display table table-striped table-hover"
+                    >
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>Modificación</th>
+                            <th>F. Creación</th>
+                            <th>Usuario Responsable</th>
+                            <th>Operación</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for soporte in object_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ soporte.id_soporte_history }}</td>
+                            <td>
+                                <ul>
+                                    <li>ID: {{ soporte.id_soporte }}</li>
+                                    <li>Nombre: {{ soporte.data.name }}</li>
+                                    <li>Descripción: {{ soporte.data.description }}</li>
+                                    <li>Estado:
+                                        <strong class="{% if soporte.data.status == 'ACTIVE' %}text-success{% else %}text-danger{% endif %}">
+                                            {% if soporte.data.status == 'ACTIVE' %}Activo{% else %}Inactivo
+                                            {% endif %}
+                                        </strong>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>{{ soporte.timestamp }}</td>
+                            <td>{{ soporte.user_login }}</td>
+                            <td>
+                          <span class="badge {% if soporte.operation == 'create' %}badge-success{% elif soporte.operation == 'update' %}badge-primary{% else %}badge-warning{% endif %}">
+                              {% if soporte.operation == 'create' %}Creación{% elif soporte.operation == 'update' %}Actualización{% else %}Cambio de estado{% endif %}
+                          </span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

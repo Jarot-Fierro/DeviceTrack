@@ -22,6 +22,7 @@ from operative_system.models import OperativeSystemHistory
 from phone.models import PhoneHistory
 from plan.models import PlanHistory
 from printer.models import PrinterHistory
+from soporte.models import SoporteHistory
 from subcategory.models import SubCategoryHistory
 from typeplan.models import TypePlanHistory
 
@@ -158,3 +159,6 @@ def save_history_standard(request, instance, action):
 
         case 'Official':
             OfficialHistory.objects.create(**data)
+
+        case 'Soporte':
+            SoporteHistory.objects.create(**data)

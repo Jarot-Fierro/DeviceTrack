@@ -1,0 +1,64 @@
+<form method="post">
+    {% csrf_token %}
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2">
+                    <div>
+                        <div class="card-title">
+                            Acción {% if id_soporte %}Actualizar{% else %}Crear{% endif %}
+
+                        </div>
+                    </div>
+                    <div class="ms-md-auto py-2 py-md-0">
+                        {% if id_soporte %}
+                        <a href="{% url 'soporte_list' %}" class="btn btn-secondary btn-round">Ir a Crear</a>
+                        {% endif %}
+                        <button type="submit" class="btn btn-primary btn-round">Guardar</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    {% if id_soporte %}
+                    <div class="col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label for="disableinput">ID.</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    id="disableinput"
+                                    placeholder=""
+                                    value="{{ id_soporte }}"
+                                    disabled
+                            />
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Nombre del Soporte</label>
+                            {{ form.name }}
+                            {% if form.name.errors %}
+                            <div class="text-danger">{{ form.name.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-lg-8">
+                        <div class="form-group">
+                            <label>Descripción.</label>
+                            {{ form.description }}
+                            {% if form.description.errors %}
+                            <div class="text-danger">{{ form.description.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
