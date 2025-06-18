@@ -1,0 +1,100 @@
+<form method="post">
+    {% csrf_token %}
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2">
+                    <div>
+                        <div class="card-title">
+                            {{ section_name }}
+                        </div>
+                    </div>
+                    <div class="ms-md-auto py-2 py-md-0">
+                        <button type="submit" class="btn btn-primary btn-round">Guardar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    <!-- Equipo en soporte -->
+                    <div class="col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Equipo en soporte</label>
+                            {{ form.device }}
+                            {% if form.device.errors %}
+                            <div class="text-danger">{{ form.device.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Funcionario que lo recibe -->
+                    <div class="col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Funcionario que lo recibe</label>
+                            {{ form.official }}
+                            {% if form.official.errors %}
+                            <div class="text-danger">{{ form.official.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Tipo de soporte -->
+                    <div class="col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Tipo de Soporte</label>
+                            {{ form.type_soporte }}
+                            {% if form.type_soporte.errors %}
+                            <div class="text-danger">{{ form.type_soporte.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Fecha de inicio -->
+                    <div class="col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Fecha de inicio</label>
+                            {{ form.date_start }}
+                            {% if form.date_start.errors %}
+                            <div class="text-danger">{{ form.date_start.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Fecha de término -->
+                    <div class="col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Fecha de término</label>
+                            {{ form.date_end }}
+                            {% if form.date_end.errors %}
+                            <div class="text-danger">{{ form.date_end.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Problema -->
+                    <div class="col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>Problema</label>
+                            {{ form.problem }}
+                            {% if form.problem.errors %}
+                            <div class="text-danger">{{ form.problem.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Solución -->
+                    <div class="col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>Solución</label>
+                            {{ form.solution }}
+                            {% if form.solution.errors %}
+                            <div class="text-danger">{{ form.solution.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

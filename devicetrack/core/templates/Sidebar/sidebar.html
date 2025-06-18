@@ -223,17 +223,17 @@
                     <div class="collapse" id="transaction">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="{% url 'establishment_list' %}">
+                                <a href="{% url 'transaction:entry' %}?type=phone">
                                     <span class="sub-item">Ingreso de Equipo</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{% url 'departament_list' %}">
+                                <a href="{% url 'transaction:output' %}?type=phone">
                                     <span class="sub-item">Entrega de Equipo</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{% url 'official_list' %}">
+                                <a href="{% url 'transaction:support' %}?type=phone">
                                     <span class="sub-item">Soporte</span>
                                 </a>
                             </li>

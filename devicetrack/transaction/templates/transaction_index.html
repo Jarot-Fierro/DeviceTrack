@@ -1,0 +1,39 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block historic %}
+<a href="#" class="btn btn-label-success btn-round me-2">Reporte</a>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        {% for card in cards %}
+        <div class="col-sm-6 col-md-3">
+            <a href="{% url 'transaction:'|add:action %}?type={{ card.key }}">
+                <div class="card card-stats card-{{ card.color }} card-round">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col col-stats">
+                                <div class="numbers">
+                                    <p class="card-category">Equipo</p>
+                                    <h4 class="card-title">{{ card.label }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% include form_partial %}
+</div>
+{% endblock %}
+
+{% block section_scripts %}
+<script src="{% static 'assets/js/plugin/sweetalert/sweetalert_popup.js' %}"></script>
+{% endblock %}

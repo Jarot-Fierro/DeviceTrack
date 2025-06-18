@@ -16,6 +16,10 @@ class Printer(StandardModel):
         ('ACTIVE', 'ACTIVE'),
         ('INACTIVE', 'INACTIVE'),
     ]
+    STATUS_DEVICE = [
+        ('ASSIGNED', 'ASIGNADO'),
+        ('IN_STOCK', 'EN BODEGA'),
+    ]
 
     id_printer = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
     number_serie = models.CharField(max_length=100)
@@ -24,6 +28,7 @@ class Printer(StandardModel):
     description = models.TextField(null=True, blank=True)
 
     status = models.CharField(max_length=150, choices=STATUS, default='ACTIVE')
+    status_device = models.CharField(max_length=150, choices=STATUS_DEVICE, default='IN_STOCK')
 
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     model = models.ForeignKey(Model, on_delete=models.CASCADE)
@@ -31,6 +36,10 @@ class Printer(StandardModel):
     inks = models.ForeignKey(Inks, on_delete=models.CASCADE)
     device_owner = models.ForeignKey(DeviceOwner, on_delete=models.CASCADE)
 
+    @property
+    def universal_id(self):
+        return self.id_printer
+    
     def __str__(self):
         return self.number_serie
 

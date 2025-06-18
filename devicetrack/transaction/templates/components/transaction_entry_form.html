@@ -1,0 +1,72 @@
+<!-- transaction_entry_form.html -->
+<form method="post">
+    {% csrf_token %}
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2">
+                    <div>
+                        <div class="card-title">
+                            {{ section_name }}
+                        </div>
+                    </div>
+                    <div class="ms-md-auto py-2 py-md-0">
+                        <button type="submit" class="btn btn-primary btn-round">Guardar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Equipo a ingresar</label>
+                            {{ form.device }}
+                            {% if form.device.errors %}
+                            <div class="text-danger">{{ form.device.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Funcionario que lo entrega</label>
+                            <input type="text" class="form-control" id="official-field" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Observaciones</label>
+                            {{ form.observation }}
+                            {% if form.observation.errors %}
+                            <div class="text-danger">{{ form.observation.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const deviceSelect = document.querySelector("select[name='device']");
+        const officialField = document.getElementById("official-field");
+
+        if (deviceSelect) {
+            deviceSelect.addEventListener("change", function () {
+                const deviceId = this.value;
+                const type = new URLSearchParams(window.location.search).get("type");
+
+                if (deviceId && type) {
+                    fetch(`/transaction/api/get-official/?type=${type}&device_id=${deviceId}`)
+                        .then(res => res.json())
+                        .then(data => {
+                            officialField.value = data.official_name || "No asignado";
+                        })
+                        .catch(() => officialField.value = "Error al cargar");
+                }
+            });
+        }
+    });
+</script>

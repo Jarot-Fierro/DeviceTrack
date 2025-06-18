@@ -1,0 +1,69 @@
+<form method="post">
+    {% csrf_token %}
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2">
+                    <div>
+                        <div class="card-title">
+                            {{ section_name }}
+                        </div>
+                    </div>
+                    <div class="ms-md-auto py-2 py-md-0">
+                        <button type="submit" class="btn btn-primary btn-round">Guardar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+
+                    <!-- Equipo -->
+                    <div class="col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Equipo a entregar</label>
+                            {{ form.device }}
+                            {% if form.device.errors %}
+                            <div class="text-danger">{{ form.device.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Funcionario (auto completado) -->
+                    <div class="col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Funcionario que lo recibe</label>
+                            {{ form.official }}
+                            {% if form.official.errors %}
+                            <div class="text-danger">{{ form.official.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Tipo de salida -->
+                    <div class="col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Tipo de salida</label>
+                            {{ form.type_output }}
+                            {% if form.type_output.errors %}
+                            <div class="text-danger">{{ form.type_output.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Fecha devolución (solo si es préstamo) -->
+                    <div class="col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Fecha de devolución (si aplica)</label>
+                            {{ form.return_date }}
+                            {% if form.return_date.errors %}
+                            <div class="text-danger">{{ form.return_date.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

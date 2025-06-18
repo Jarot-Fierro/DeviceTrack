@@ -32,14 +32,24 @@ SERIAL_STATUS = [
 
 # Base Model
 class Article(StandardModel):
+    STATUS_DEVICE = [
+        ('ASSIGNED', 'ASIGNADO'),
+        ('IN_STOCK', 'EN BODEGA'),
+    ]
     id_article = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False, unique=True)
     name = models.CharField(max_length=200)
+
     status = models.CharField(max_length=10, choices=STATUS, default='ACTIVE')
+    status_device = models.CharField(max_length=150, choices=STATUS_DEVICE, default='IN_STOCK')
 
     description = models.TextField(blank=True, null=True)
     brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True, blank=True)
     model = models.ForeignKey(Model, on_delete=models.SET_NULL, null=True, blank=True)
     is_serialized = models.BooleanField(default=False)  # Indicates if the article has serial numbers
+
+    @property
+    def universal_id(self):
+        return self.id_article
 
     def __str__(self):
         return self.name

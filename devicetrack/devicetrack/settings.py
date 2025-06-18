@@ -76,6 +76,7 @@ INSTALLED_APPS = [
     'establishment',
     'departament',
     'soporte',
+    'transaction',
 ]
 
 MIDDLEWARE = [

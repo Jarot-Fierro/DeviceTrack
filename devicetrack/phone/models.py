@@ -15,15 +15,25 @@ class Phone(StandardModel):
         ('ACTIVE', 'ACTIVE'),
         ('INACTIVE', 'INACTIVE'),
     ]
+    STATUS_DEVICE = [
+        ('ASSIGNED', 'ASIGNADO'),
+        ('IN_STOCK', 'EN BODEGA'),
+    ]
 
     id_phone = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
     imei = models.CharField(max_length=30)
+
     status = models.CharField(max_length=150, choices=STATUS, default='ACTIVE')
+    status_device = models.CharField(max_length=150, choices=STATUS_DEVICE, default='IN_STOCK')
 
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     chip = models.ForeignKey(Chip, on_delete=models.CASCADE)
     subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     models = models.ForeignKey(Model, on_delete=models.CASCADE)
+
+    @property
+    def universal_id(self):
+        return self.id_phone
 
     def __str__(self):
         return self.imei
