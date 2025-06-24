@@ -1,14 +1,9 @@
 from django import forms
-from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator
 
+from devicetrack.validation_forms import validate_name, validate_description, validate_default
 from establishment.models import Establishment
 from .models import Departament
-
-STATUS = [
-    ('ACTIVE', 'Activo'),
-    ('INACTIVE', 'Inactivo'),
-]
 
 
 class FormDepartament(forms.ModelForm):
@@ -18,8 +13,8 @@ class FormDepartament(forms.ModelForm):
                 'id': 'name_departament',
                 'class': 'form-control',
                 'placeholder': 'Nombre del Departamento',
-                'min-lenght': 1,
-                'max-lenght': 100
+                'minlenght': '1',
+                'maxlenght': '100'
             }),
         required=True
     )
@@ -29,8 +24,8 @@ class FormDepartament(forms.ModelForm):
                 'id': 'address_departament',
                 'class': 'form-control',
                 'placeholder': 'Calle y número',
-                'min-lenght': 1,
-                'max-lenght': 100
+                'minlenght': '1',
+                'maxlenght': '100'
             }),
         required=True
     )
@@ -63,10 +58,21 @@ class FormDepartament(forms.ModelForm):
         exists = Departament.objects.filter(name__iexact=name).exclude(
             pk=current_instance.pk if current_instance else None).exists()
 
-        if exists:
-            raise ValidationError("Ya existe una marca con este nombre.")
+        validate_name(name, exists, 'nombre del departamento')
 
         return name
+
+    def clean_description(self):
+        description = self.cleaned_data['description'].strip()
+        validate_description(description)
+
+        return description
+
+    def clean_address(self):
+        address = self.cleaned_data['address'].strip()
+        validate_default(address)
+
+        return address
 
     class Meta:
         model = Departament

@@ -50,7 +50,6 @@ class CustomLoginForm(forms.Form):
 
 class FormUsuario(forms.ModelForm):
     password = forms.CharField(
-        label='Contraseña',
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
             'placeholder': 'Ingrese la contraseña'
@@ -59,7 +58,6 @@ class FormUsuario(forms.ModelForm):
     )
 
     confirm_password = forms.CharField(
-        label='Confirmar Contraseña',
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
             'placeholder': 'Confirme la contraseña'
@@ -68,7 +66,6 @@ class FormUsuario(forms.ModelForm):
     )
 
     first_name = forms.CharField(
-        label='Nombre',
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'placeholder': 'Nombre'
@@ -77,7 +74,6 @@ class FormUsuario(forms.ModelForm):
     )
 
     last_name = forms.CharField(
-        label='Apellido',
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'placeholder': 'Apellido'
@@ -86,7 +82,6 @@ class FormUsuario(forms.ModelForm):
     )
 
     email = forms.EmailField(
-        label='Correo Electrónico',
         widget=forms.EmailInput(attrs={
             'class': 'form-control',
             'placeholder': 'ejemplo@correo.com'
@@ -95,7 +90,6 @@ class FormUsuario(forms.ModelForm):
     )
 
     username = forms.CharField(
-        label='Nombre de Usuario',
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'placeholder': 'Nombre de usuario único'

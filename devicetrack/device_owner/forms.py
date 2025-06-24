@@ -1,13 +1,8 @@
 from django import forms
-from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator
+
+from devicetrack.validation_forms import validate_name, validate_description
 from .models import DeviceOwner
-
-
-STATUS = [
-        ('ACTIVE', 'Activo'),
-        ('INACTIVE', 'Inactivo'),
-    ]
 
 
 class FormDeviceOwner(forms.ModelForm):
@@ -41,10 +36,16 @@ class FormDeviceOwner(forms.ModelForm):
         exists = DeviceOwner.objects.filter(name__iexact=name).exclude(
             pk=current_instance.pk if current_instance else None).exists()
 
-        if exists:
-            raise ValidationError("Ya existe una marca con este nombre.")
+        validate_name(name, exists)
 
         return name
+
+    def clean_description(self):
+        description = self.cleaned_data['description'].strip()
+
+        validate_description(description)
+
+        return description
 
     class Meta:
         model = DeviceOwner

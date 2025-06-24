@@ -1,19 +1,19 @@
 from django import forms
-from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator
+
+from devicetrack.validation_forms import (
+    validate_name,
+    validate_date_today,
+    validate_description,
+    validate_date_start_end, validate_default
+)
 from .models import TypePlan, Plan
 
-
-STATUS = [
-        ('ACTIVE', 'Activo'),
-        ('INACTIVE', 'Inactivo'),
-    ]
-
 STATUS_BILLING = [
-        ('PENDING', 'Pendiente'),
-        ('PAYING', 'Pagando'),
-        ('CANCELED', 'Cancelado'),
-    ]
+    ('PENDING', 'Pendiente'),
+    ('PAYING', 'Pagando'),
+    ('CANCELED', 'Cancelado'),
+]
 
 
 class FormPlan(forms.ModelForm):
@@ -28,30 +28,49 @@ class FormPlan(forms.ModelForm):
             }),
         required=True
     )
-    gigabytes = forms.CharField(
+
+    gigabytes = forms.IntegerField(
+        min_value=1,
         widget=forms.NumberInput(
             attrs={
                 'id': 'gigabytes_plan',
                 'class': 'form-control'
             }),
-        required=False
+        required=False,
+        error_messages={
+            'min_value': 'El valor debe ser mayor a 0',
+            'invalid': 'El valor debe ser numérico'
+        }
     )
-    minutes = forms.CharField(
+
+    minutes = forms.IntegerField(
+        min_value=1,
         widget=forms.NumberInput(
             attrs={
                 'id': 'minutes_plan',
                 'class': 'form-control'
             }),
-        required=False
+        required=False,
+        error_messages={
+            'min_value': 'El valor debe ser mayor a 0',
+            'invalid': 'El valor debe ser numérico'
+        }
     )
-    messages = forms.CharField(
+
+    messages = forms.IntegerField(
+        min_value=1,
         widget=forms.NumberInput(
             attrs={
                 'id': 'messages_plan',
                 'class': 'form-control'
             }),
-        required=False
+        required=False,
+        error_messages={
+            'min_value': 'El valor debe ser mayor a 0',
+            'invalid': 'El valor debe ser numérico'
+        }
     )
+
     unlimited_gigabytes = forms.BooleanField(
         widget=forms.CheckboxInput(
             attrs={
@@ -60,6 +79,7 @@ class FormPlan(forms.ModelForm):
             }),
         required=False
     )
+
     unlimited_minutes = forms.BooleanField(
         widget=forms.CheckboxInput(
             attrs={
@@ -68,6 +88,7 @@ class FormPlan(forms.ModelForm):
             }),
         required=False
     )
+
     unlimited_messages = forms.BooleanField(
         widget=forms.CheckboxInput(
             attrs={
@@ -76,14 +97,21 @@ class FormPlan(forms.ModelForm):
             }),
         required=False
     )
-    price = forms.CharField(
+
+    price = forms.IntegerField(
+        min_value=1,
         widget=forms.NumberInput(
             attrs={
                 'id': 'price_plan',
                 'class': 'form-control'
             }),
-        required=False
+        required=False,
+        error_messages={
+            'min_value': 'El valor debe ser mayor a 0',
+            'invalid': 'El valor debe ser numérico'
+        }
     )
+
     status_billing = forms.ChoiceField(
         choices=STATUS_BILLING,
         widget=forms.Select(
@@ -93,6 +121,7 @@ class FormPlan(forms.ModelForm):
             }
         )
     )
+
     type_plan = forms.ModelChoiceField(
         queryset=TypePlan.objects.filter(status='ACTIVE'),
         empty_label="--  Selecciona el tipo de Plan  --",
@@ -116,21 +145,6 @@ class FormPlan(forms.ModelForm):
         required=False
     )
 
-    date_cancellation = forms.DateField(
-        widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-        required=False
-    )
-    reason_cancellation = forms.CharField(
-        widget=forms.TextInput(
-            attrs={
-                'id': 'reason_cancellation_plan',
-                'class': 'form-control',
-                'placeholder': 'Motivo de Cancelación',
-                'max-lenght': 100
-            }),
-        required=False
-    )
-
     description = forms.CharField(
         widget=forms.Textarea(
             attrs={
@@ -147,13 +161,25 @@ class FormPlan(forms.ModelForm):
         name = self.cleaned_data['name'].strip()
         current_instance = self.instance if self.instance.pk else None
 
-        exists = Plan.objects.filter(name__iexact=name).exclude(
+        exists = TypePlan.objects.filter(name__iexact=name).exclude(
             pk=current_instance.pk if current_instance else None).exists()
 
-        if exists:
-            raise ValidationError("Ya existe una marca con este nombre.")
+        validate_name(name, exists)
 
         return name
+
+    def clean_date_hiring(self):
+        date_hiring = self.cleaned_data['date_hiring'].strip()
+        validate_date_today(date_hiring)
+
+        return date_hiring
+
+    def clean_description(self):
+        description = self.cleaned_data['description'].strip()
+
+        validate_description(description)
+
+        return description
 
     class Meta:
         model = Plan
@@ -169,7 +195,6 @@ class FormPlan(forms.ModelForm):
             'status_billing',
             'type_plan',
             'date_hiring',
-            'date_cancellation'
         ]
 
 
@@ -194,6 +219,20 @@ class FormCancellationPlan(forms.ModelForm):
             }),
         required=True
     )
+
+    def clean_date_cancellation(self):
+        date_cancellation = self.cleaned_data['date_cancellation'].strip()
+        date_hiring = self.cleaned_data['date_hiring'].strip()
+
+        validate_date_start_end(date_hiring, date_cancellation)
+
+        return date_cancellation
+
+    def clean_reason_cancellation(self):
+        reason_cancellation = self.cleaned_data['reason_cancellation'].strip()
+        validate_default(reason_cancellation)
+
+        return reason_cancellation
 
     class Meta:
         model = Plan

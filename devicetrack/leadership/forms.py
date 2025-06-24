@@ -1,13 +1,8 @@
 from django import forms
 from django.core.exceptions import ValidationError
+
+from devicetrack.validation_forms import validate_rut, validate_name, validate_email, validate_default
 from .models import Leadership
-from .utils import rut_validate
-
-
-STATUS = [
-        ('ACTIVE', 'Activo'),
-        ('INACTIVE', 'Inactivo'),
-    ]
 
 
 class FormLeadership(forms.ModelForm):
@@ -63,8 +58,7 @@ class FormLeadership(forms.ModelForm):
         exists = Leadership.objects.filter(name__iexact=name).exclude(
             pk=current_instance.pk if current_instance else None).exists()
 
-        if exists:
-            raise ValidationError("Ya existe un registro con este nombre.")
+        validate_name(name, exists, 'Nombre')
 
         return name
 
@@ -78,7 +72,7 @@ class FormLeadership(forms.ModelForm):
         if exists:
             raise ValidationError("Ya existe un registro con este RUT.")
 
-        if not rut_validate(rut):
+        if not validate_rut(rut):
             raise ValidationError("El RUT ingresado no es válido.")
 
         return rut
@@ -93,7 +87,13 @@ class FormLeadership(forms.ModelForm):
         if exists:
             raise ValidationError("Ya existe un registro con este correo.")
 
-        return email
+        validate_email(email)
+
+        return
+
+    def clean_boss_position(self):
+        boss_position = self.cleaned_data['boss_position'].strip()
+        validate_default(boss_position)
 
     class Meta:
         model = Leadership

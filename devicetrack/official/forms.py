@@ -1,14 +1,13 @@
 from django import forms
-from django.core.exceptions import ValidationError
 
 from departament.models import Departament
-from devicetrack.utils import rut_validate
+from devicetrack.validation_forms import (
+    validate_rut,
+    validate_default,
+    validate_name,
+    validate_email
+)
 from .models import Official
-
-STATUS = [
-    ('ACTIVE', 'Activo'),
-    ('INACTIVE', 'Inactivo'),
-]
 
 
 class FormOfficial(forms.ModelForm):
@@ -81,37 +80,19 @@ class FormOfficial(forms.ModelForm):
 
     def clean_first_names(self):
         first_names = self.cleaned_data['first_names'].strip()
-        current_instance = self.instance if self.instance.pk else None
-
-        exists = Official.objects.filter(first_names__iexact=first_names).exclude(
-            pk=current_instance.pk if current_instance else None).exists()
-
-        if exists:
-            raise ValidationError("Ya existe un registro con este nombre.")
+        validate_default(first_names)
 
         return first_names
 
     def clean_pather_surname(self):
         pather_surname = self.cleaned_data['pather_surname'].strip()
-        current_instance = self.instance if self.instance.pk else None
-
-        exists = Official.objects.filter(pather_surname__iexact=pather_surname).exclude(
-            pk=current_instance.pk if current_instance else None).exists()
-
-        if exists:
-            raise ValidationError("Ya existe un registro con este nombre.")
+        validate_default(pather_surname)
 
         return pather_surname
 
     def clean_mather_surname(self):
         mather_surname = self.cleaned_data['mather_surname'].strip()
-        current_instance = self.instance if self.instance.pk else None
-
-        exists = Official.objects.filter(mather_surname__iexact=mather_surname).exclude(
-            pk=current_instance.pk if current_instance else None).exists()
-
-        if exists:
-            raise ValidationError("Ya existe un registro con este nombre.")
+        validate_default(mather_surname)
 
         return mather_surname
 
@@ -122,11 +103,9 @@ class FormOfficial(forms.ModelForm):
         exists = Official.objects.filter(rut__iexact=rut).exclude(
             pk=current_instance.pk if current_instance else None).exists()
 
-        if exists:
-            raise ValidationError("Ya existe un registro con este RUT.")
+        validate_name(rut, exists, 'RUT')
 
-        if not rut_validate(rut):
-            raise ValidationError("El RUT ingresado no es válido.")
+        validate_rut(rut)
 
         return rut
 
@@ -137,8 +116,8 @@ class FormOfficial(forms.ModelForm):
         exists = Official.objects.filter(email__iexact=email).exclude(
             pk=current_instance.pk if current_instance else None).exists()
 
-        if exists:
-            raise ValidationError("Ya existe un registro con este correo.")
+        validate_name(email, exists, 'correo electrónico')
+        validate_email(email)
 
         return email
 

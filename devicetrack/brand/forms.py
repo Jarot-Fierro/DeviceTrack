@@ -1,12 +1,7 @@
 from django import forms
-from django.core.exceptions import ValidationError
+
+from devicetrack.validation_forms import validate_name
 from .models import Brand
-
-
-STATUS = [
-        ('ACTIVE', 'Activo'),
-        ('INACTIVE', 'Inactivo'),
-    ]
 
 
 class FormBrand(forms.ModelForm):
@@ -29,9 +24,7 @@ class FormBrand(forms.ModelForm):
         exists = Brand.objects.filter(name__iexact=name).exclude(
             pk=current_instance.pk if current_instance else None).exists()
 
-        if exists:
-            raise ValidationError("Ya existe una marca con este nombre.")
-
+        validate_name(name, exists, 'Nombre')
         return name
 
     class Meta:

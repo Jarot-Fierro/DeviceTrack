@@ -7,11 +7,6 @@ from model.models import Model
 from subcategory.models import SubCategory
 from .models import Phone
 
-STATUS = [
-    ('ACTIVE', 'Activo'),
-    ('INACTIVE', 'Inactivo'),
-]
-
 
 class FormPhone(forms.ModelForm):
     imei = forms.CharField(
@@ -78,7 +73,7 @@ class FormPhone(forms.ModelForm):
             pk=current_instance.pk if current_instance else None).exists()
 
         if exists:
-            raise ValidationError("Ya existe una marca con este nombre.")
+            raise ValidationError("Ya existe una registro con este IMEI.")
 
         return imei
 

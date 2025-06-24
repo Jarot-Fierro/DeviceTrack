@@ -1,4 +1,6 @@
 from django import forms
+
+from devicetrack.validation_forms import validate_name
 from .models import SubCategory, Category
 
 
@@ -26,6 +28,16 @@ class FormSubCategory(forms.ModelForm):
         ),
         required=True
     )
+
+    def clean_name(self):
+        name = self.cleaned_data['name'].strip()
+        current_instance = self.instance if self.instance.pk else None
+        exists = SubCategory.objects.filter(name__iexact=name).exclude(
+            pk=current_instance.pk if current_instance else None).exists()
+
+        validate_name(name, exists, 'Nombre')
+
+        return name
 
     class Meta:
         model = SubCategory

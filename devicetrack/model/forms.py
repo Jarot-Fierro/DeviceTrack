@@ -1,12 +1,12 @@
 from django import forms
-from django.core.exceptions import ValidationError
+
+from devicetrack.validation_forms import validate_name
 from .models import Model
 
-
 STATUS = [
-        ('ACTIVE', 'Activo'),
-        ('INACTIVE', 'Inactivo'),
-    ]
+    ('ACTIVE', 'Activo'),
+    ('INACTIVE', 'Inactivo'),
+]
 
 
 class FormModel(forms.ModelForm):
@@ -25,12 +25,10 @@ class FormModel(forms.ModelForm):
     def clean_name(self):
         name = self.cleaned_data['name'].strip()
         current_instance = self.instance if self.instance.pk else None
-
         exists = Model.objects.filter(name__iexact=name).exclude(
             pk=current_instance.pk if current_instance else None).exists()
 
-        if exists:
-            raise ValidationError("Ya existe un modelo con este nombre.")
+        validate_name(name, exists, 'Nombre')
 
         return name
 

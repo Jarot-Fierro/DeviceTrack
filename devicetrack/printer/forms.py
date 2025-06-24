@@ -3,15 +3,11 @@ from django.core.exceptions import ValidationError
 
 from brand.models import Brand
 from device_owner.models import DeviceOwner
+from devicetrack.validation_forms import validate_ip
 from inks.models import Inks
 from model.models import Model
 from subcategory.models import SubCategory
 from .models import Printer
-
-STATUS = [
-    ('ACTIVE', 'Activo'),
-    ('INACTIVE', 'Inactivo'),
-]
 
 
 class FormPrinter(forms.ModelForm):
@@ -21,8 +17,8 @@ class FormPrinter(forms.ModelForm):
                 'id': 'number_serie_printer',
                 'class': 'form-control',
                 'placeholder': 'Número de Serie',
-                'min-lenght': 1,
-                'max-lenght': 100
+                'minlength': '1',
+                'maxlength': '100'
             }),
         required=True
     )
@@ -31,8 +27,8 @@ class FormPrinter(forms.ModelForm):
             attrs={
                 'id': 'mac_printer',
                 'class': 'form-control',
-                'min-lenght': 1,
-                'max-lenght': 100
+                'minlength': '1',
+                'maxlength': '100'
             }),
         required=True
     )
@@ -42,8 +38,8 @@ class FormPrinter(forms.ModelForm):
                 'id': 'ip_printer',
                 'class': 'form-control',
                 'placeholder': '192.168.0.1',
-                'min-lenght': 1,
-                'max-lenght': 100
+                'minlength': '1',
+                'maxlength': '100'
             }),
         required=True
     )
@@ -114,6 +110,12 @@ class FormPrinter(forms.ModelForm):
             raise ValidationError("Ya existe una marca con este nombre.")
 
         return number_serie
+
+    def clean_ip(self):
+        ip = self.cleaned_data['ip'].strip()
+        validate_ip(ip)
+
+        return ip
 
     class Meta:
         fields = [

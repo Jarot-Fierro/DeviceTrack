@@ -1,13 +1,8 @@
 from django import forms
-from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator
 
+from devicetrack.validation_forms import validate_name, validate_description
 from .models import Establishment
-
-STATUS = [
-    ('ACTIVE', 'Activo'),
-    ('INACTIVE', 'Inactivo'),
-]
 
 
 class FormEstablishment(forms.ModelForm):
@@ -17,8 +12,8 @@ class FormEstablishment(forms.ModelForm):
                 'id': 'name_establishment',
                 'class': 'form-control',
                 'placeholder': 'Nombre del Establecimiento',
-                'min-lenght': 1,
-                'max-lenght': 100
+                'minlenght': '1',
+                'maxlenght': '100'
             }),
         required=True
     )
@@ -28,8 +23,8 @@ class FormEstablishment(forms.ModelForm):
                 'id': 'city_establishment',
                 'class': 'form-control',
                 'placeholder': 'Santiago',
-                'min-lenght': 1,
-                'max-lenght': 100
+                'minlenght': '1',
+                'maxlenght': '100'
             }),
         required=True
     )
@@ -52,10 +47,15 @@ class FormEstablishment(forms.ModelForm):
         exists = Establishment.objects.filter(name__iexact=name).exclude(
             pk=current_instance.pk if current_instance else None).exists()
 
-        if exists:
-            raise ValidationError("Ya existe una marca con este nombre.")
+        validate_name(name, exists, 'nombre del establecimiento')
 
         return name
+
+    def clean_description(self):
+        description = self.cleaned_data['description'].strip()
+        validate_description(description)
+
+        return description
 
     class Meta:
         model = Establishment

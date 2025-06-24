@@ -1,9 +1,8 @@
-# forms.py
 from django import forms
-from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator
 
 from brand.models import Brand
+from devicetrack.validation_forms import validate_name, validate_description
 from model.models import Model
 from .models import SerialNumber, Article
 
@@ -66,14 +65,19 @@ class FormArticle(forms.ModelForm):
     def clean_name(self):
         name = self.cleaned_data['name'].strip()
         current_instance = self.instance if self.instance.pk else None
-
         exists = Article.objects.filter(name__iexact=name).exclude(
             pk=current_instance.pk if current_instance else None).exists()
 
-        if exists:
-            raise ValidationError("Ya existe un registro con este nombre.")
+        validate_name(name, exists)
 
         return name
+
+    def clean_description(self):
+        description = self.cleaned_data['description'].strip()
+
+        validate_description(description)
+
+        return description
 
     class Meta:
         fields = [
@@ -94,8 +98,11 @@ class FormArticleUpdate(FormArticle):
 class FormStock(forms.Form):
     stock = forms.IntegerField(
         min_value=1,
-        label="Cantidad a agregar",
-        widget=forms.NumberInput(attrs={"class": "form-control"})
+        widget=forms.NumberInput(attrs={"class": "form-control"}),
+        error_messages={
+            'min_value': 'El valor debe ser mayor a 0',
+            'invalid': 'El valor debe ser numérico'
+        }
     )
 
 
