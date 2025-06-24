@@ -1,0 +1,45 @@
+{% load static %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Registros Habilitados</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table
+                            id="multi-filter-select"
+                            class="display table table-striped table-hover"
+                    >
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Código</th>
+                            <th>Funcionario</th>
+                            <th>Usuario</th>
+                            <th>Tipo de Transacción</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for transaction in object_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ transaction.transaction.code }}</td>
+                            <td>{{ transaction.transaction.official }}</td>
+                            <td>{{ transaction.transaction.login_user }}</td>
+                            <td>
+                                <span class="badge {% if transaction.transaction.get_type_display == 'Entrada' %}badge-success{% elif transaction.transaction.get_type_display == 'Salida' %}badge-danger{% else %}badge-primary{% endif %}">{{ transaction.transaction.get_type_display }}</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
