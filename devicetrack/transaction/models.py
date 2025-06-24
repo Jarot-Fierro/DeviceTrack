@@ -89,3 +89,8 @@ class DetailTransaction(StandardModel):
         if hasattr(self.device, 'number_serie') or hasattr(self.device, 'imei'):
             if self.amount != 1:
                 raise ValidationError("Los equipos con número de serie solo deben tener cantidad 1.")
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['content_type', 'object_id']),
+        ]
