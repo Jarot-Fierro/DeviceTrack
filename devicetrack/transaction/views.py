@@ -46,7 +46,7 @@ class DeviceTransactionMixin:
         elif isinstance(self, OutputView):
             return model.objects.filter(status='ACTIVE', status_device='IN_STOCK')
         elif isinstance(self, SupportView):
-            return model.objects.filter(status='ACTIVE', status_device='ASSIGNED')
+            return model.objects.filter(status='ACTIVE')
         return model.objects.none()
 
 

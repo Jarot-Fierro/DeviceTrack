@@ -59,7 +59,7 @@
                 const type = new URLSearchParams(window.location.search).get("type");
 
                 if (deviceId && type) {
-                    fetch(`/transaction/api/get-official/?type=${type}&device_id=${deviceId}`)
+                    fetch(`/transacciones/api/get-official/?type=${type}&device_id=${deviceId}`)
                         .then(res => res.json())
                         .then(data => {
                             officialField.value = data.official_name || "No asignado";

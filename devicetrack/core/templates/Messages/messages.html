@@ -22,18 +22,22 @@
             case "error":
                 titulo = "Error";
                 icono = "error";
+                button = "danger";
                 break;
             case "warning":
                 titulo = "Advertencia";
                 icono = "warning";
+                button = "warning";
                 break;
             case "info":
                 titulo = "Información";
                 icono = "info";
+                button = "info";
                 break;
             default:
                 titulo = "Éxito";
                 icono = "success";
+                button = "success"
         }
 
         swal({
@@ -42,7 +46,7 @@
             icon: icono,
             buttons: {
                 confirm: {
-                    className: 'btn btn-' + icono,
+                    className: 'btn btn-' + button,
                     text: "Aceptar"
                 }
             }

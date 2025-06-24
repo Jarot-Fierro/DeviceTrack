@@ -14,7 +14,6 @@ class LoginRequiredMiddleware:
         return self.get_response(request)
 
     def process_view(self, request, view_func, view_args, view_kwargs):
-        print(f"[Middleware] Procesando vista: {request.path}")
 
         if any(request.path.startswith(prefix) for prefix in EXEMPT_PATH_PREFIXES):
             return None
