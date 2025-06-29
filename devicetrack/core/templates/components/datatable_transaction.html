@@ -24,11 +24,11 @@
                         {% for transaction in object_list %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td>{{ transaction.transaction.code }}</td>
-                            <td>{{ transaction.transaction.official }}</td>
-                            <td>{{ transaction.transaction.login_user }}</td>
+                            <td>{{ transaction.code }}</td>
+                            <td>{{ transaction.official }}</td>
+                            <td>{{ transaction.login_user }}</td>
                             <td>
-                                <span class="badge {% if transaction.transaction.get_type_display == 'Entrada' %}badge-success{% elif transaction.transaction.get_type_display == 'Salida' %}badge-danger{% else %}badge-primary{% endif %}">{{ transaction.transaction.get_type_display }}</span>
+                                <span class="badge {% if transaction.get_type_display == 'Entrada' %}badge-success{% elif transaction.get_type_display == 'Salida' %}badge-danger{% else %}badge-primary{% endif %}">{{ transaction.get_type_display }}</span>
                             </td>
                         </tr>
                         {% endfor %}

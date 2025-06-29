@@ -59,9 +59,9 @@ class EntryView(DeviceTransactionMixin, FormView):
         type_ = self.request.GET.get('type')
         model_map = DEVICE_MODELS
         model = model_map.get(type_)
-        if model:
-            return model.objects.filter(status='ACTIVE', status_device='ASSIGNED')
-        return model.objects.none()  # si type no es válido
+        if model is None:
+            return Article.objects.none()
+        return model.objects.filter(status='ACTIVE', status_device='ASSIGNED')
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
@@ -70,21 +70,29 @@ class EntryView(DeviceTransactionMixin, FormView):
 
     def form_valid(self, form):
         with transaction.atomic():
+            official = form.cleaned_data['official']
             trx = Transaction.objects.create(
                 type='ENTRY',
-                official=form.cleaned_data['official'],
+                official=official,
                 login_user=self.request.user,
                 observation=form.cleaned_data.get('observation', '')
             )
+
             device = form.cleaned_data['device']
             content_type = ContentType.objects.get_for_model(device.__class__)
             DetailTransaction.objects.create(
                 transaction=trx,
                 content_type=content_type,
-                object_id=device.universal_id
+                object_id=device.universal_id  # UUID del dispositivo
             )
+
             update_status_device(trx, device)
+
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        print("Errores del formulario:", form.errors)
+        return super().form_invalid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -174,7 +182,7 @@ class OutputView(DeviceTransactionMixin, FormView):
 class SupportView(DeviceTransactionMixin, FormView):
     template_name = 'transaction_index.html'
     form_class = SupportForm
-    success_url = reverse_lazy('transaction:support')
+    success_url = reverse_lazy('index')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -18,13 +18,9 @@ class EntryForm(forms.Form):
         ),
     )
     official = forms.ModelChoiceField(
-        queryset=Official.objects.all().filter(status='ACTIVE'),
-        empty_label="Seleccione un funcionario",
-        widget=forms.Select(
-            attrs={
-                'class': 'form-control'
-            }
-        ),
+        queryset=Official.objects.all(),
+        widget=forms.HiddenInput(),
+        required=False
     )
     observation = forms.CharField(
         widget=forms.Textarea(
@@ -37,6 +33,15 @@ class EntryForm(forms.Form):
         required=False,
         validators=[MaxLengthValidator(200, message='No puedes escribir más de 200 caracteres.')],
     )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        official = cleaned_data.get('official')
+
+        if not official:
+            raise forms.ValidationError("No se pudo obtener el funcionario asociado al dispositivo.")
+
+        return cleaned_data
 
 
 class OutputForm(forms.Form):

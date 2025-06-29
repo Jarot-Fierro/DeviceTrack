@@ -25,24 +25,25 @@ def get_official_for_device(request):
         return JsonResponse({'error': 'Datos inválidos'}, status=400)
 
     try:
-        # Obtener ContentType del modelo dinámico
         content_type = ContentType.objects.get_for_model(Model)
-
-        # Buscar el último DetailTransaction con ese equipo
         last_detail = DetailTransaction.objects.filter(
             content_type=content_type,
             object_id=device_id
         ).order_by('-created_at').first()
 
         if not last_detail:
-            return JsonResponse({'official_name': 'Sin historial'})
+            return JsonResponse({
+                'id_official': None,
+                'official_name': 'Sin historial'
+            })
 
-        # Obtener el oficial desde la transacción
         official = last_detail.transaction.official
-        name = str(official) if official else "No asignado"
-
-        return JsonResponse({'official_name': name})
+        return JsonResponse({
+            'id_official': str(official.id_official),  # UUID
+            'official_name': str(official.first_names) + ' ' + str(official.pather_surname) + ' ' + str(
+                official.mather_surname),
+        })
 
     except Exception as e:
         print("Error:", str(e))
-        return JsonResponse({'error': 'Error interno del servidor'}, status=500)
+        return JsonResponse({'error': 'Error interno'}, status=500)

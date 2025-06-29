@@ -1,6 +1,6 @@
 from django.views.generic import ListView
 
-from transaction.models import DetailTransaction
+from transaction.models import Transaction
 
 
 class CoreView(ListView):
@@ -8,7 +8,7 @@ class CoreView(ListView):
     context_object_name = 'object_list'
 
     def get_queryset(self):
-        queryset = DetailTransaction.objects.all().order_by('-created_at')
+        queryset = Transaction.objects.all().order_by('-created_at')
         return queryset
 
     def get_context_data(self, **kwargs):

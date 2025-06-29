@@ -31,6 +31,7 @@
                         <div class="form-group">
                             <label>Funcionario que lo entrega</label>
                             <input type="text" class="form-control" id="official-field" disabled>
+                            <input type="hidden" name="official" id="id_official">
                         </div>
                     </div>
                     <div class="col-md-4 col-lg-4">
@@ -48,25 +49,27 @@
     </div>
 </form>
 
+<!-- Script para cargar datos -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js "></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const deviceSelect = document.querySelector("select[name='device']");
-        const officialField = document.getElementById("official-field");
+    $(document).ready(function () {
+        $('#id_device').on('change', function () {
+            const deviceType = new URLSearchParams(window.location.search).get('type');
+            const deviceId = $(this).val();
 
-        if (deviceSelect) {
-            deviceSelect.addEventListener("change", function () {
-                const deviceId = this.value;
-                const type = new URLSearchParams(window.location.search).get("type");
+            if (!deviceType || !deviceId) {
+                $('#official-field').val('');
+                $('#id_official').val('');
+                return;
+            }
 
-                if (deviceId && type) {
-                    fetch(`/transacciones/api/get-official/?type=${type}&device_id=${deviceId}`)
-                        .then(res => res.json())
-                        .then(data => {
-                            officialField.value = data.official_name || "No asignado";
-                        })
-                        .catch(() => officialField.value = "Error al cargar");
-                }
+            $.getJSON(`/transacciones/api/get-official/?type=${deviceType}&device_id=${deviceId}`, function (data) {
+                $('#official-field').val(data.official_name);
+                $('#id_official').val(data.id_official); // UUID del Official
+            }).fail(function () {
+                $('#official-field').val('Error obteniendo datos');
+                $('#id_official').val('');
             });
-        }
+        });
     });
 </script>
